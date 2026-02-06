@@ -1,5 +1,5 @@
 import Listas.ListaSimple;
-import Listas.Producto;
+import Listas.Nodo;
 
 import java.util.Locale; //En caso de no tener el teclado en inglés
 import java.util.Scanner;
@@ -22,15 +22,19 @@ public class Contenedor {
         System.out.println("Ingrese peso en kg: ");
         double peso = sc.nextDouble();
 
-        productos.insertaFinal(id,nombre,peso);
+        productos.insertaFinal(new Producto(id,nombre,peso));
     }
 
     public double calcularPeso(){
         double peso = 0.0;
 
-        Producto actual = productos.getInicio();
+        Nodo actual = productos.getInicio();
         while (actual != null){
-            peso += actual.getPeso();
+            Object temp = actual.getDato();
+            Producto prod = (Producto) temp; //Casteo necesario para poder trabajar con tipo Producto
+
+            peso += prod.getPeso();
+
             actual = actual.getSiguiente();
         }
 
@@ -43,13 +47,17 @@ public class Contenedor {
         System.out.println("\nIngrese el id del producto a buscar: ");
         String id = sc.nextLine();
 
-        Producto actual = productos.getInicio();
+        Nodo actual = productos.getInicio();
         while (actual != null){
-            if(actual.getId().equals(id)){
+            Object temp = actual.getDato();
+            Producto prod = (Producto) temp; //Casteo necesario para poder trabajar con tipo Producto
+
+            if(prod.getId().equals(id)){
                 System.out.println("\nProducto Econtrado!");
-                System.out.println(actual);
+                System.out.println(prod);
                 break;
             }
+
             actual = actual.getSiguiente();
         }
 
@@ -60,9 +68,13 @@ public class Contenedor {
 
     public void mostrarProductos(){
         System.out.println("\nProductos del contenedor: ");
-        Producto actual = productos.getInicio();
+
+        Nodo actual = productos.getInicio();
         while (actual != null){
-            System.out.println(actual);
+            Object temp = actual.getDato();
+            Producto prod = (Producto) temp; //Casteo necesario para poder trabajar con tipo Producto
+
+            System.out.println(prod);
             actual = actual.getSiguiente();
         }
     }

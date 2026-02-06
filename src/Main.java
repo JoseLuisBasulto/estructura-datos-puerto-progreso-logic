@@ -8,7 +8,8 @@ public class Main {
 
         contenedor.mostrarProductos();
 
-        contenedor.calcularPeso();
+        double peso = contenedor.calcularPeso();
+        System.out.printf("\nEl peso del contenedor es: %.2f Kg\n", peso);
 
         contenedor.buscarProducto();
     }

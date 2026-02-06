@@ -3,28 +3,28 @@ package Listas;
 public class ListaSimple extends Lista{
 
     @Override
-    public void insertaInicio(String id, String nombre, double peso) {
+    public void insertaInicio(Object dato) {
         if(vacio()){
-            inicio = ultimo = new Producto(id,nombre,peso);
+            inicio = ultimo = new Nodo(dato);
         }else{
-            inicio = new Producto(id, nombre, peso, inicio);
+            inicio = new Nodo(dato, inicio);
         }
     }
 
     @Override
-    public void insertaFinal(String id, String nombre, double peso) {
+    public void insertaFinal(Object dato) {
         if(vacio()){
-            inicio = ultimo = new Producto(id,nombre,peso);
+            inicio = ultimo = new Nodo(dato);
         }else{
-            Producto nuevo = new Producto(id,nombre,peso);
+            Nodo nuevo = new Nodo(dato);
             ultimo.setSiguiente(nuevo);
             ultimo = nuevo;
         }
     }
 
     @Override
-    public Producto eliminaInicio() {
-        Producto eliminado = null;
+    public Object eliminaInicio() {
+        Object eliminado = null;
 
         if(vacio()){
             System.out.println("No hay productos");
@@ -41,8 +41,8 @@ public class ListaSimple extends Lista{
     }
 
     @Override
-    public Producto eliminaFinal() {
-        Producto eliminado = null;
+    public Object eliminaFinal() {
+        Object eliminado = null;
 
         if(vacio()){
             System.out.println("No hay productos");
@@ -52,7 +52,7 @@ public class ListaSimple extends Lista{
                 inicio = ultimo = null;
             }else{
                 eliminado = ultimo;
-                Producto actual = inicio;
+                Nodo actual = inicio;
                 while (actual.siguiente != ultimo){
                     actual = actual.siguiente;
                 }

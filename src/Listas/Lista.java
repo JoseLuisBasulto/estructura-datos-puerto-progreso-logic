@@ -1,27 +1,27 @@
 package Listas;
 
 public abstract class Lista {
-    protected Producto inicio;
-    protected Producto ultimo;
+    protected Nodo inicio;
+    protected Nodo ultimo;
 
     public Lista(){
         inicio = ultimo = null;
     }
 
     public void imprimir(){
-       Producto actual = inicio;
+       Nodo actual = inicio;
        System.out.println("Productos: ");
        while (actual != null){
-           System.out.println(actual);
+           System.out.println(actual.dato);
            actual = actual.siguiente;
        }
     }
 
     //Métodos abstractos de manipulación de lista
-    public abstract void insertaInicio (String id, String  nombre, double peso);
-    public abstract void insertaFinal (String id, String  nombre, double peso);
-    public abstract Producto eliminaInicio ();
-    public abstract Producto eliminaFinal ();
+    public abstract void insertaInicio (Object dato);
+    public abstract void insertaFinal (Object dato);
+    public abstract Object eliminaInicio ();
+    public abstract Object eliminaFinal ();
 
     public boolean vacio(){
         return inicio == null;
@@ -29,19 +29,19 @@ public abstract class Lista {
 
 
     //Setters y Getters
-    public Producto getInicio() {
+    public Nodo getInicio() {
         return inicio;
     }
 
-    public void setInicio(Producto inicio) {
+    public void setInicio(Nodo inicio) {
         this.inicio = inicio;
     }
 
-    public Producto getUltimo() {
+    public Nodo getUltimo() {
         return ultimo;
     }
 
-    public void setUltimo(Producto ultimo) {
+    public void setUltimo(Nodo ultimo) {
         this.ultimo = ultimo;
     }
 }
