@@ -13,4 +13,9 @@ public abstract class ListaD extends Lista {
         return inicio;
     }
 
+    @Override
+    public NodoDoble getUltimo() {
+        return ultimo;
+    }
+
 }

@@ -3,38 +3,63 @@ import Listas.NodoDoble;
 
 import java.util.Scanner;
 
-public class Ruta { //Quedan casos por validar
+public class Ruta {
     Scanner sc = new Scanner(System.in);
     protected ListaDoble rutas;
     public Ruta(){
         rutas = new ListaDoble();
-        rutas.insertaInicio("Puerto Progreso (Inicio)");
     }
     public void agregarParadaFinal () {
-        System.out.print("Ingrese el nombre de la parada: ");
+        System.out.print("Ingrese el nombre de la nueva parada: ");
         String parada = sc.nextLine();
-        rutas.insertaFinal(parada);
+
+        if(valido(parada)) {rutas.insertaFinal(parada);}
     }
     public void agregarEntreParadas () {
-        System.out.print("Ingrese el nombre de la nueva parada: ");
-        String nuevaParada = sc.nextLine();
-        System.out.println("Identifique entre que destinos se integrará la nueva parada. (No importa el orden de los destinos)");
-        System.out.print("Destino 1: ");
-        String parada1 = sc.nextLine();
-        System.out.print("Destino 2: ");
-        String parada2 = sc.nextLine();
-        rutas.insertaEntreNodos(parada1, parada2, nuevaParada);
+        if(rutas.vacio()) {
+            System.out.println("No hay paradas registradas.");
+        } else{
+            System.out.print("Ingrese el nombre de la nueva parada: ");
+            String nuevaParada = sc.nextLine();
+            if(!valido(nuevaParada)) { return; }
+
+
+            System.out.println("Identifique entre que destinos se integrará la nueva parada. (No importa el orden de los destinos)");
+            System.out.print("Destino 1: ");
+            String parada1 = sc.nextLine();
+            System.out.print("Destino 2: ");
+            String parada2 = sc.nextLine();
+
+            rutas.insertaEntreNodos(parada1, parada2, nuevaParada);
+        }
+
     }
     public void eliminarParada () {
+        if(rutas.vacio()) {
+            System.out.println("No hay paradas registradas para eliminar.");
+            return;
+        }
         System.out.println("Ingrese el nombre de la parada a cancelar: ");
         String paradaEliminada = sc.nextLine();
-        if(rutas.eliminarEspecifico(paradaEliminada) != null) {
-            System.out.println("Parada: \"" + paradaEliminada + "\" Cancelada con éxito");
+        if(paradaEliminada.isEmpty()) {System.out.println("Nombre no valido");return; }
+
+        if(paradaEliminada.equals(rutas.getInicio().getDato())) {
+            System.out.println("Parada \""+rutas.eliminaInicio()+"\" Cancelada");
+        } else if (paradaEliminada.equals(rutas.getUltimo().getDato())) {
+            System.out.println("Parada \""+rutas.eliminaFinal()+"\" Cancelada");
         } else {
-            System.out.println("La parada no existe");
+            if(rutas.eliminarEntreNodos(paradaEliminada)!= null) {
+                System.out.println("Parada \""+paradaEliminada+"\" Cancelada");
+            } else {
+                System.out.println("Para no existente, acción cancelada");
+            }
         }
     }
     public void simular () {
+        if(rutas.vacio()) {
+            System.out.println("No hay nigúin destino trazado");
+            return;
+        }
         NodoDoble actual = rutas.getInicio();
         String op;
         System.out.println("Simulación de rutas");
@@ -44,7 +69,7 @@ public class Ruta { //Quedan casos por validar
             if(actual.getSiguiente() == null) { fin = true; }
             if(actual.getAnterior() == null) { inicio = true; }
             if(!fin || inicio) {
-               System.out.println("Parada actual -> " + actual.getDato());
+               System.out.println("Parada actual -> " + actual.getDato() + ((inicio) ? " (Inicio) ":""));
                System.out.print("[1] Siguiente parada\n[2] Anterior parada\n[3] Salir\nOpcion: ");
            } else {
                System.out.println("Parada actual -> " + actual.getDato() + " (Final)");
@@ -70,14 +95,16 @@ public class Ruta { //Quedan casos por validar
                         fin = false;
                     }
                 }
-                case "3" -> {
-                    System.out.println("Saliando ...");
-                }
-                default -> {
-                    System.out.println("Ingrese una opción válida");
-                }
+                case "3" -> System.out.println("Saliando ...");
+                default -> System.out.println("Ingrese una opción válida");
             }
         } while (!op.equals("3"));
+
+    }
+    public boolean valido (String nombre) {
+        if(nombre.isEmpty()){System.out.println("Nombre no válido");return false;}
+        else if (rutas.existeNodo(nombre)) {System.out.println("El nombre de la parada ya existe");return false;}
+        return true;
     }
 
 }

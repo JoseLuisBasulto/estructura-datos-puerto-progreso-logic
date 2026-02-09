@@ -1,6 +1,6 @@
 package Listas;
 
-public class ListaDoble extends ListaD{ //Podemos quitar el ifvacio() y eliminar inicio si puerto es el primer elemento
+public class ListaDoble extends ListaD{
     @Override
     public void insertaInicio(Object dato) {
         if(vacio()) {
@@ -11,7 +11,6 @@ public class ListaDoble extends ListaD{ //Podemos quitar el ifvacio() y eliminar
             inicio = nuevo;
         }
     }
-
 
     @Override
     public void insertaFinal(Object dato) {
@@ -27,12 +26,14 @@ public class ListaDoble extends ListaD{ //Podemos quitar el ifvacio() y eliminar
     @Override
     public Object eliminaInicio() {
         Object eliminado = null;
-        if(vacio()) {
-            System.out.println("Lista vacía");
-        } else {
+        if(!vacio()) {
             eliminado = inicio.getDato();
-            inicio = inicio.getSiguiente();
-            inicio.setAnterior(ultimo);
+            if (inicio == ultimo) {
+                inicio = ultimo = null;
+            } else {
+                inicio = inicio.getSiguiente();
+                inicio.setAnterior(null);
+            }
         }
         return eliminado;
     }
@@ -40,62 +41,66 @@ public class ListaDoble extends ListaD{ //Podemos quitar el ifvacio() y eliminar
     @Override
     public Object eliminaFinal() {
         Object eliminado = null;
-        if(vacio()) {
-            System.out.println("Lista vacía");
-
-        } else {
+        if(!vacio()) {
             eliminado = ultimo.getDato();
-            ultimo = ultimo.getAnterior();
-            ultimo.setSiguiente(null);
+            if (inicio == ultimo) {
+                inicio = ultimo = null;
+            } else {
+                ultimo = ultimo.getAnterior();
+                ultimo.setSiguiente(null);
+            }
         }
         return  eliminado;
     }
-    public void insertaEntreNodos(Object a, Object b, Object c) {
-        if(vacio()) {
-            System.out.println("No es posible");
-        } else {
+    //Encuentra la primer coincidencia y revisa al siguiente
+    public void insertaEntreNodos(Object a, Object b, Object dato) {
+        if(!vacio()) {
             NodoDoble actual = inicio;
-            while((!actual.getDato().equals(a) && !actual.getDato().equals(b) ) && actual != null) {
+            while (actual != null && (!actual.getDato().equals(a) && !actual.getDato().equals(b))) {
                 actual = actual.getSiguiente();
             }
-            if(actual.getDato().equals(a) || actual.getDato().equals(b)) {
-                if(actual.getSiguiente().getDato().equals(b)||actual.getSiguiente().getDato().equals(a)) {
-                    NodoDoble nuevo = new NodoDoble(c);
-                    NodoDoble sigActual = actual.getSiguiente();
-                    actual.setSiguiente(nuevo);
-                    sigActual.setAnterior(nuevo);
-                    nuevo.setAnterior(actual);
-                    nuevo.setSiguiente(sigActual);
-                } else {
-                    System.out.println("No es posible");
-                }
+            // Filtro de seguridad para no romper el código
+            if ((actual != null && actual.getSiguiente() != null) && (actual.getSiguiente().getDato().equals(b) || actual.getSiguiente().getDato().equals(a))) {
+                NodoDoble nuevo = new NodoDoble(dato);
+                NodoDoble sigActual = actual.getSiguiente();
+                actual.setSiguiente(nuevo);
+                sigActual.setAnterior(nuevo);
+                nuevo.setAnterior(actual);
+                nuevo.setSiguiente(sigActual);
             } else {
                 System.out.println("No es posible");
             }
         }
     }
 
-    public Object eliminarEspecifico(Object a) {
-        if(ultimo.getDato().equals(a)) {
-            return eliminaFinal();
-        } else {
+    public Object eliminarEntreNodos(Object a) {
+        if(!vacio()) {
             NodoDoble actual = inicio;
-            while(!actual.getDato().equals(a) && actual != null ) {
+            while (actual != null && !actual.getDato().equals(a)) {
                 actual = actual.getSiguiente();
             }
-            if(actual.getDato().equals(a)) {
+            if(actual != null) {
                 NodoDoble anterior = actual.getAnterior();
                 NodoDoble siguiente = actual.getSiguiente();
                 anterior.setSiguiente(siguiente);
                 siguiente.setAnterior(anterior);
-                actual.setSiguiente(null); //revisar si es necesario
+                actual.setSiguiente(null);
                 actual.setAnterior(null);
-            } else {
-                System.out.println("No es posible");
-                return null;
             }
             return actual;
+
         }
+        return null;
+    }
+    public boolean existeNodo(Object dato) {
+        if(!vacio()) {
+            NodoDoble actual = inicio;
+            while (actual != null && !actual.getDato().equals(dato)) {
+                actual = actual.getSiguiente();
+            }
+            return actual != null;
+        }
+        return false;
     }
 
 
