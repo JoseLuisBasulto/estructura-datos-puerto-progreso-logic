@@ -1,5 +1,4 @@
 import listas.ListaSimple;
-import listas.Nodo;
 import pilas.PilaContenedores;
 
 import java.util.Scanner;

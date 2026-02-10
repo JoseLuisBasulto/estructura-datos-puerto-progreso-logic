@@ -63,11 +63,11 @@ public class ListaSimple extends Lista {
         return eliminado;
     }
 
-    public Object buscarElemento(String cadena) {
+    public Object buscarElemento(Object dato) {
         Nodo actual = inicio;
 
         while (actual != null) {
-            if (actual.getDato().equals(cadena)) {
+            if (actual.getDato().equals(dato)) {
                 return actual.dato;
             }
             actual = actual.siguiente;
