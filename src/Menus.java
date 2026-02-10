@@ -127,7 +127,7 @@ public class Menus {
         do {
             System.out.println("\n[1] Agregar producto");
             System.out.println("[2] Calcular peso total");
-            System.out.println("[3] regresar");
+            System.out.println("[3] Regresar");
 
             System.out.println("\nSeleccione una opción");
             opcion = sc.nextLine();
