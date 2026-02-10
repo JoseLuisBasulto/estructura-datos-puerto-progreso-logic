@@ -68,7 +68,7 @@ public class Menus {
                 case "1" -> {System.out.println("Uno"); yield true;} // Push a una pila
                 case "2" -> {System.out.println("Dos"); yield true;} // Pop de una pila
                 case "3" -> {System.out.println("tres"); yield true;} // Peek
-                case "4" -> {System.out.println("cuatro"); yield true;} //submenu agregar producto y calcular peso total
+                case "4" -> {submenuInspeccionarContenedor(); yield true;}
                 case "5" -> {menuPrincipal(); yield true;}
                 default -> {System.out.println("Opción inválida"); yield false;}
             };
@@ -106,14 +106,31 @@ public class Menus {
         System.out.println(">> Próximo en turno: Placa \n"); // Placa o identificador supongo
         System.out.println("[ESTADO DE INVENTARIO]:");
         //LOGICA PARA MOSTRAR LAS PILAS
-        System.out.printf("[ESTADO DE LOGÍSTICA]:");
+        System.out.println("[ESTADO DE LOGÍSTICA]:");
         System.out.println(">> Rutas activas: "); // Espera valor
         System.out.println(">> Proximo Destino: "); // Espera valor
         System.out.println(">> Total de paradas programadas: \n"); // Espera valor
 
-        System.out.println("Presione cualquier tecla para volver al menú principal...");
-        if(sc.nextLine() != null){
-            menuPrincipal();
-        }
+        System.out.println("Presione Enter para volver al menú principal...");
+        sc.nextLine(); //Espera la entrada
+        menuPrincipal();
+    }
+
+    public static void submenuInspeccionarContenedor(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("[1] Agregar producto");
+        System.out.println("[2] Calcular peso total");
+
+        String opcion;
+        boolean valido; //Para validar el caracter de entrada
+        do {
+            System.out.println("\nSeleccione una opción");
+            opcion = sc.nextLine();
+            valido = switch (opcion) {
+                case "1" -> {System.out.println("Uno"); yield true;} //Instancia contenedor para agregar producto
+                case "2" -> {System.out.println("Dos"); yield true;} //Instancia contenedor para calcular su peso total
+                default -> {System.out.println("Opción inválida"); yield false;}
+            };
+        }while (!valido);
     }
 }
