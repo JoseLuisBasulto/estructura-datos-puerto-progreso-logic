@@ -28,7 +28,7 @@ public class ColaCamiones implements Queue{
     @Override
     public Object dequeue() {
         if (isEmpty()) {
-            System.out.println("No hay camiones en espera");
+            System.out.println("\nNo hay camiones en espera");
             return null;
         }
 
@@ -60,12 +60,13 @@ public class ColaCamiones implements Queue{
     public boolean isEmpty() {
         return size == 0;
     }
+
     public void listar() {
         Nodo actual = inicio;
         if (isEmpty()) {
-            System.out.println("No hay camiones en espera.");
+            System.out.println("\nNo hay camiones en espera.");
         } else {
-            System.out.println("Camiones en espera:");
+            System.out.println("\nCamiones en espera:");
             while (actual != null) {
                 System.out.println(actual.getDato());
                 actual = actual.getSiguiente();
