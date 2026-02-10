@@ -1,4 +1,4 @@
-package Listas;
+package listas;
 
 public class ListaDoble extends ListaD{
 

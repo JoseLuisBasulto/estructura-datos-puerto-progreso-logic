@@ -1,5 +1,5 @@
-import Listas.ListaDoble;
-import Listas.NodoDoble;
+import listas.ListaDoble;
+import listas.NodoDoble;
 
 import java.util.Scanner;
 

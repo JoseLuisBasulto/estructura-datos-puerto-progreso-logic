@@ -1,4 +1,4 @@
-package Listas;
+package listas;
 
 public class Nodo {
     protected Object dato;

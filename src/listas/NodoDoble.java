@@ -1,4 +1,4 @@
-package Listas;
+package listas;
 
 public class NodoDoble extends Nodo {
     protected NodoDoble siguiente;

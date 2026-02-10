@@ -1,4 +1,4 @@
-package Listas;
+package listas;
 
 public abstract class Lista {
     protected Nodo inicio;

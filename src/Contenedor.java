@@ -1,5 +1,5 @@
-import Listas.ListaSimple;
-import Listas.Nodo;
+import listas.ListaSimple;
+import listas.Nodo;
 
 import java.util.Locale; //En caso de no tener el teclado en inglés ✅
 import java.util.Scanner;

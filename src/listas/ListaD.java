@@ -1,4 +1,4 @@
-package Listas;
+package listas;
 
 public abstract class ListaD extends Lista {
     protected NodoDoble inicio;
