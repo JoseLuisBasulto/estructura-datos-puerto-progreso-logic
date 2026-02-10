@@ -5,6 +5,8 @@ import java.util.Locale; //En caso de no tener el teclado en inglés ✅
 import java.util.Scanner;
 
 public class Contenedor {
+    private String id;
+    private Ruta ruta;
     private ListaSimple productos;
 
     public Contenedor(){
@@ -77,5 +79,30 @@ public class Contenedor {
             System.out.println(prod);
             actual = actual.getSiguiente();
         }
+    }
+
+    // Setters y Getters
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Ruta getRuta() {
+        return ruta;
+    }
+
+    public void setRuta(Ruta ruta) {
+        this.ruta = ruta;
+    }
+
+    public ListaSimple getProductos() {
+        return productos;
+    }
+
+    public void setProductos(ListaSimple productos) {
+        this.productos = productos;
     }
 }
