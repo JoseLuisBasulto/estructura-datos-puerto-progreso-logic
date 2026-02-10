@@ -1,7 +1,7 @@
 import java.util.Scanner;
-
+import Colas.ColaCamiones;
 public class Menus {
-
+private static ColaCamiones cola = new ColaCamiones();
     public static void menuPrincipal(){
         Scanner sc = new Scanner(System.in);
         String opcion;
@@ -44,10 +44,32 @@ public class Menus {
             opcion = sc.nextLine();
 
             switch (opcion) {
-                case "1" -> System.out.println("Uno"); // Enqueue
-                case "2" -> System.out.println("Dos"); // Dequeue
-                case "3" -> System.out.println("Tres"); // Peek
-                case "4" -> System.out.println("Cuatro"); // Listar
+                case "1" -> {
+                    System.out.print("Ingrese placa del camión: ");
+                    String placa = sc.nextLine();
+
+                    Camion camion = new Camion(placa);
+                    cola.enqueue(camion);
+
+                    System.out.println("Camión registrado correctamente.");
+                } // Enqueue
+                case "2" -> {
+                    Camion atendido = (Camion) cola.dequeue();
+
+                    if (atendido != null) {
+                        System.out.println("Camión ingresando al patio: " + atendido);
+                    }
+                } // Dequeue
+                case "3" -> {
+                    Camion siguiente = (Camion) cola.front();
+
+                    if (siguiente != null) {
+                        System.out.println("Próximo camión: " + siguiente);
+                    } else {
+                        System.out.println("No hay camiones en espera.");
+                    }
+                } // Peek
+                case "4" -> cola.listar(); // Listar la cola
                 case "5" -> { return ;}
                 default -> System.out.println("Opción inválida");
             }

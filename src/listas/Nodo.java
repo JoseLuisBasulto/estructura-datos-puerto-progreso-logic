@@ -1,6 +1,6 @@
 package listas;
 
-public class Nodo {
+public class  Nodo {
     protected Object dato;
     protected Nodo siguiente;
 

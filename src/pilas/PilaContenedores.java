@@ -1,6 +1,7 @@
 package pilas;
 
 import listas.ListaSimple;
+import listas.Nodo;
 
 public class PilaContenedores implements Stack {
     protected ListaSimple lst;
@@ -56,5 +57,10 @@ public class PilaContenedores implements Stack {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    @Override
+    public String toString() {
+        return nombre;
     }
 }
