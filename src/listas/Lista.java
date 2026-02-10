@@ -10,7 +10,6 @@ public abstract class Lista {
 
     public void imprimir(){
        Nodo actual = inicio;
-       System.out.println("Productos: ");
        while (actual != null){
            System.out.println(actual.dato);
            actual = actual.siguiente;

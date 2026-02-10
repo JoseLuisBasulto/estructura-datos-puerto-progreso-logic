@@ -2,19 +2,21 @@ package pilas;
 
 import listas.ListaSimple;
 
-public class ListaSPila implements Stack{
-    protected ListaSimple lst:
-    protected int cont;
+public class PilaContenedores implements Stack {
+    protected ListaSimple lst;
+    protected int contador;
+    protected String nombre;
 
-    public ListaSPila() {
+    public PilaContenedores(String nombre) {
         lst = new ListaSimple();
-        cont = 0;
+        contador = 0;
+        this.nombre = nombre;
     }
 
     @Override
     public void push(Object x) {
-        lst.insertarInicio(x);
-        cont++;
+        lst.insertaInicio(x);
+        contador++;
     }
 
     @Override
@@ -23,8 +25,8 @@ public class ListaSPila implements Stack{
             System.out.println("Pila vacía");
             return null;
         } else {
-            cont--;
-            return lst.eliminarInicio();
+            contador--;
+            return lst.eliminaInicio();
         }
     }
 
@@ -40,11 +42,19 @@ public class ListaSPila implements Stack{
 
     @Override
     public int size() {
-        return cont;
+        return contador;
     }
 
     @Override
     public boolean isEmpty() {
         return lst.vacio();
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }

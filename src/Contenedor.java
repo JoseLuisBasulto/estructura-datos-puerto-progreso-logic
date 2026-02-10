@@ -72,7 +72,7 @@ public class Contenedor {
         Nodo actual = productos.getInicio();
         while (actual != null){
             Object temp = actual.getDato();
-            Producto prod = (Producto) temp; //Casteo necesario para poder trabajar con tipo Producto
+            Producto prod = (Producto) temp; // Casteo necesario para poder trabajar con tipo Producto
 
             System.out.println(prod);
             actual = actual.getSiguiente();

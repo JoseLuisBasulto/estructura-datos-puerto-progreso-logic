@@ -51,7 +51,7 @@ public class Menus {
                 case "5" -> { return ;}
                 default -> System.out.println("Opción inválida");
             }
-        } while (true); // Bucle infito que solo se sale con el return
+        } while (true); // Bucle infinito que solo se sale con el return
     }
 
     public static void menuPatioContenedores(){
@@ -69,9 +69,9 @@ public class Menus {
             opcion = sc.nextLine();
 
             switch (opcion) {
-                case "1" -> System.out.println("uno"); // Push a una pila
-                case "2" -> System.out.println("dos");// Pop de una pila
-                case "3" -> System.out.println("tres"); // Peek
+                case "1" -> System.out.println("Uno"); // Push a una pila
+                case "2" -> System.out.println("Dos");// Pop de una pila
+                case "3" -> System.out.println("Tres"); // Peek
                 case "4" -> submenuInspeccionarContenedor();
                 case "5" -> { return; }
                 default -> System.out.println("Opción inválida");
@@ -96,8 +96,8 @@ public class Menus {
           switch (opcion) {
                 case "1" -> System.out.println("Uno"); // Append
                 case "2" -> System.out.println("Dos");// Insert
-                case "3" -> System.out.println("tres"); // Delete node
-                case "4" -> System.out.println("cuatro"); // Navegación anterior/siguiente
+                case "3" -> System.out.println("Tres"); // Delete node
+                case "4" -> System.out.println("Cuatro"); // Navegación anterior/siguiente
                 case "5" -> { return; }
                 default -> System.out.println("Opción inválida");
           }
@@ -133,8 +133,8 @@ public class Menus {
             opcion = sc.nextLine();
 
             switch (opcion) {
-                case "1" -> System.out.println("uno"); //Instancia contenedor para agregar producto
-                case "2" -> System.out.println("dos");//Instancia contenedor para calcular su peso total
+                case "1" -> System.out.println("Uno"); //Instancia contenedor para agregar producto
+                case "2" -> System.out.println("Dos");//Instancia contenedor para calcular su peso total
                 case "3" -> { return; }
                 default -> System.out.println("Opción inválida");
             }
