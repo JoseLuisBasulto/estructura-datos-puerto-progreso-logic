@@ -8,6 +8,7 @@ public abstract class ListaD extends Lista {
     public boolean vacio() {
         return inicio == null;
     }
+
     @Override
     public NodoDoble getInicio() {
         return inicio;

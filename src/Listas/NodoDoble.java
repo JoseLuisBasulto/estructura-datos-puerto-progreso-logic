@@ -3,11 +3,14 @@ package Listas;
 public class NodoDoble extends Nodo {
     protected NodoDoble siguiente;
     protected NodoDoble anterior;
+
     public NodoDoble() {}
+
     public NodoDoble(Object dato) {
         this.dato = dato;
         siguiente = anterior = null;
     }
+
     public NodoDoble(Object dato, NodoDoble anterior, NodoDoble siguiente) {
         this.dato = dato;
         this.siguiente = siguiente;

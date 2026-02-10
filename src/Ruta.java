@@ -6,15 +6,18 @@ import java.util.Scanner;
 public class Ruta {
     Scanner sc = new Scanner(System.in);
     protected ListaDoble rutas;
+
     public Ruta(){
         rutas = new ListaDoble();
     }
+
     public void agregarParadaFinal () {
         System.out.print("Ingrese el nombre de la nueva parada: ");
         String parada = sc.nextLine();
 
         if(valido(parada)) {rutas.insertaFinal(parada);}
     }
+
     public void agregarEntreParadas () {
         if(rutas.vacio()) {
             System.out.println("No hay paradas registradas.");
@@ -34,6 +37,7 @@ public class Ruta {
         }
 
     }
+
     public void eliminarParada () {
         if(rutas.vacio()) {
             System.out.println("No hay paradas registradas para eliminar.");
@@ -55,6 +59,7 @@ public class Ruta {
             }
         }
     }
+
     public void simular () {
         if(rutas.vacio()) {
             System.out.println("No hay nigúin destino trazado");
@@ -101,6 +106,7 @@ public class Ruta {
         } while (!op.equals("3"));
 
     }
+
     public boolean valido (String nombre) {
         if(nombre.isEmpty()){System.out.println("Nombre no válido");return false;}
         else if (rutas.existeNodo(nombre)) {System.out.println("El nombre de la parada ya existe");return false;}

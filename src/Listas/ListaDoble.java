@@ -1,6 +1,7 @@
 package Listas;
 
 public class ListaDoble extends ListaD{
+
     @Override
     public void insertaInicio(Object dato) {
         if(vacio()) {
@@ -52,6 +53,7 @@ public class ListaDoble extends ListaD{
         }
         return  eliminado;
     }
+
     //Encuentra la primer coincidencia y revisa al siguiente
     public void insertaEntreNodos(Object a, Object b, Object dato) {
         if(!vacio()) {
@@ -84,14 +86,12 @@ public class ListaDoble extends ListaD{
                 NodoDoble siguiente = actual.getSiguiente();
                 anterior.setSiguiente(siguiente);
                 siguiente.setAnterior(anterior);
-                actual.setSiguiente(null);
-                actual.setAnterior(null);
             }
             return actual;
-
         }
         return null;
     }
+
     public boolean existeNodo(Object dato) {
         if(!vacio()) {
             NodoDoble actual = inicio;
@@ -102,6 +102,4 @@ public class ListaDoble extends ListaD{
         }
         return false;
     }
-
-
 }
