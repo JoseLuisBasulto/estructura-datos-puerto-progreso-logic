@@ -1,6 +1,6 @@
 package listas;
 
-public class ListaSimple extends Lista{
+public class ListaSimple extends Lista {
 
     @Override
     public void insertaInicio(Object dato) {
@@ -61,5 +61,17 @@ public class ListaSimple extends Lista{
             }
         }
         return eliminado;
+    }
+
+    public Object buscarElemento(String cadena) {
+        Nodo actual = inicio;
+
+        while (actual != null) {
+            if (actual.getDato().equals(cadena)) {
+                return actual.dato;
+            }
+            actual = actual.siguiente;
+        }
+        return null;
     }
 }

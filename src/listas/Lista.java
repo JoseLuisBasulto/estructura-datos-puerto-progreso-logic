@@ -26,7 +26,6 @@ public abstract class Lista {
         return inicio == null;
     }
 
-
     //Setters y Getters
     public Nodo getInicio() {
         return inicio;
