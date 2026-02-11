@@ -1,7 +1,6 @@
 import listas.ListaSimple;
 import listas.Nodo;
 
-import java.awt.font.ShapeGraphicAttribute;
 import java.util.Locale; //En caso de no tener el teclado en inglés ✅
 import java.util.Scanner;
 
@@ -33,13 +32,15 @@ public class Contenedor {
     public double calcularPeso(){
         double peso = 0.0;
 
-        Nodo actual = productos.getInicio();
-        while (actual != null){
-            Producto prod = (Producto) actual.getDato(); //Casteo necesario para poder trabajar con tipo Producto
+        if(!productos.vacio()){
+            Nodo actual = productos.getInicio();
+            while (actual != null){
+                Producto prod = (Producto) actual.getDato(); //Casteo necesario para poder trabajar con tipo Producto
 
-            peso += prod.getPeso();
+                peso += prod.getPeso();
 
-            actual = actual.getSiguiente();
+                actual = actual.getSiguiente();
+            }
         }
 
         return peso;
@@ -67,22 +68,19 @@ public class Contenedor {
         System.out.println("\nIngrese el id del producto a buscar: ");
         String id = sc.nextLine();
 
-        Nodo actual = productos.getInicio();
-        while (actual != null){
+        if(existeProducto(id)){
+            Nodo actual = productos.getInicio();
             Producto prod = (Producto) actual.getDato(); // Casteo necesario para poder trabajar con tipo Producto
 
-            if(prod.getId().equals(id)){
-                System.out.println("\nProducto Econtrado!");
-                System.out.println(prod);
-                break;
+            while (!prod.getId().equals(id)){ // Mientras no se encuentre el producto se avanza
+                actual = actual.getSiguiente(); // Avanzamos entre los productos
+                prod = (Producto) actual.getDato(); // Guardamos el id del producto
             }
-
-            actual = actual.getSiguiente();
+            System.out.println("Producto Econtrado!");
+            System.out.println(prod);
+            return;
         }
-
-        if(actual == null){
-            System.out.println("\nProducto no econtrado...");
-        }
+        System.out.println("\nProducto no econtrado...");
     }
 
     //Método que elimina un producto de la lista, no tiene parámetros y devuelve el producto eliminado
@@ -90,7 +88,7 @@ public class Contenedor {
         Scanner sc = new Scanner(System.in);
         Producto eliminado = null; // Caso base si no existe el producto
 
-        System.out.println("Ingrese el id del producto a eliminar: ");
+        System.out.println("\nIngrese el id del producto a eliminar: ");
         String id = sc.nextLine();
 
         if(existeProducto(id)) { //Si existe el producto
@@ -102,7 +100,7 @@ public class Contenedor {
                 prod = (Producto) actual.getDato(); // Guardamos el id del producto
             }
 
-            eliminado = (Producto) actual.getDato(); //Se guarda el producto eliminado
+            eliminado = prod; // Se guarda el producto eliminado
 
             if(actual == productos.getInicio() && actual == productos.getUltimo()){
                 productos.setInicio(null); // Indicando que la lista esta vacía
