@@ -1,7 +1,6 @@
 package pilas;
 
 import listas.ListaSimple;
-import listas.Nodo;
 
 public class PilaContenedores implements Stack {
     protected ListaSimple lst;
