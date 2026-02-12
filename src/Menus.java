@@ -1,7 +1,11 @@
 import java.util.Scanner;
 import Colas.ColaCamiones;
+
 public class Menus {
-private static ColaCamiones cola = new ColaCamiones();
+    private static ColaCamiones cola = new ColaCamiones();
+    //Variable de clase "controlador" para poder acceder a los métodos de las demás clases
+    private static Controlador controlador = new Controlador();
+
     public static void menuPrincipal(){
         Scanner sc = new Scanner(System.in);
         String opcion;
@@ -129,12 +133,12 @@ private static ColaCamiones cola = new ColaCamiones();
     public static void menuReporteGeneral(){
         Scanner sc = new Scanner(System.in);
         System.out.println("\n[ESTADO DE RECEPCIÓN]:");
-        System.out.println(">> Camiones en espera: "); // Espera un valor
+        System.out.println(">> Camiones en espera: ");
         System.out.println(">> Próximo en turno: Placa \n"); // Placa o identificador supongo
         System.out.println("[ESTADO DE INVENTARIO]:");
         //LOGICA PARA MOSTRAR LAS PILAS
         System.out.println("[ESTADO DE LOGÍSTICA]:");
-        System.out.println(">> Rutas activas: "); // Espera valor
+        System.out.println(">> Rutas activas: ");
         System.out.println(">> Proximo Destino: "); // Espera valor
         System.out.println(">> Total de paradas programadas: \n"); // Espera valor
 
@@ -148,19 +152,24 @@ private static ColaCamiones cola = new ColaCamiones();
 
         do {
             System.out.println("\n[1] Agregar producto");
-            System.out.println("[2] Calcular peso total");
-            System.out.println("[3] Regresar");
+            System.out.println("[2] Eliminar Producto");
+            System.out.println("[3] Buscar Producto");
+            System.out.println("[4] Calcular peso total");
+            System.out.println("[5] Mostrar Productos");
+            System.out.println("[6] Regresar");
 
             System.out.println("\nSeleccione una opción");
             opcion = sc.nextLine();
 
             switch (opcion) {
-                case "1" -> System.out.println("Uno"); //Instancia contenedor para agregar producto
-                case "2" -> System.out.println("Dos");//Instancia contenedor para calcular su peso total
-                case "3" -> { return; }
+                case "1" -> controlador.agregarProducto();
+                case "2" -> System.out.println("Producto eliminado: " + controlador.eliminarProducto());
+                case "3" -> controlador.buscarProducto();
+                case "4" -> System.out.println("Peso total: " + controlador.calcularPesoTotal());
+                case "5" -> controlador.mostrarProductos();
+                case "6" -> { return; }
                 default -> System.out.println("Opción inválida");
             }
-
         }while (true);
     }
 }
