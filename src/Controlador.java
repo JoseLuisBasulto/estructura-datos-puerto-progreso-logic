@@ -1,50 +1,65 @@
+import Colas.ColaCamiones;
 import listas.ListaSimple;
 
 public class Controlador {
-    private Camion camion;
+    private ColaCamiones colaRecepcion;
     private Patio patio;
+    private ListaSimple ListaRutas; // Implementar la clase de ListaRutas
     private Contenedor contenedorSeleccionado;
-    private ListaSimple rutas;
-    private ListaSimple camiones;
 
-    // Setters y Getters
-    public Camion getCamion() {
-        return camion;
+    // Inicialización de los atributos
+    public Controlador(){
+        colaRecepcion = new ColaCamiones();
+        patio = new Patio();
+        ListaRutas = new ListaSimple();
+        contenedorSeleccionado = new Contenedor();
     }
 
-    public void setCamion(Camion camion) {
-        this.camion = camion;
+    //Bloque de ColaCamiones
+    public void registrarLlegadaCamion(Camion camion){
+        colaRecepcion.enqueue(camion);
     }
 
-    public Contenedor getContenedorSeleccionado() {
-        return contenedorSeleccionado;
+    public void darIngresoPatio(){
+        //JB MOMENTO PARA DEQUEUE
     }
 
-    public void setContenedorSeleccionado(Contenedor contenedorSeleccionado) {
-        this.contenedorSeleccionado = contenedorSeleccionado;
+
+    //Bloque de clase Contenedor
+    public void agregarProducto(){
+        contenedorSeleccionado.agregarProducto();
     }
 
-    public ListaSimple getRutas() {
-        return rutas;
+    public Producto eliminarProducto(){
+        return contenedorSeleccionado.eliminarProducto();
     }
 
-    public void setRutas(ListaSimple rutas) {
-        this.rutas = rutas;
+    public void buscarProducto(){
+        contenedorSeleccionado.buscarProducto();
+    }
+
+    public double calcularPesoTotal(){
+        return contenedorSeleccionado.calcularPeso();
+    }
+
+    public void mostrarProductos(){
+        contenedorSeleccionado.mostrarProductos();
+    }
+
+    // Getters
+    public ColaCamiones getColaRecepcion() {
+        return colaRecepcion;
     }
 
     public Patio getPatio() {
         return patio;
     }
 
-    public void setPatio(Patio patio) {
-        this.patio = patio;
+    public ListaSimple getListaRutas() {
+        return ListaRutas;
     }
 
-    public ListaSimple getCamiones() {
-        return camiones;
-    }
-
-    public void setCamiones(ListaSimple camiones) {
-        this.camiones = camiones;
+    public Contenedor getContenedorSeleccionado() {
+        return contenedorSeleccionado;
     }
 }

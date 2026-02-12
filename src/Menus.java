@@ -3,7 +3,7 @@ import Colas.ColaCamiones;
 
 public class Menus {
     private static ColaCamiones cola = new ColaCamiones();
-    //Variable estática controlador que contiene la información para usarse en toda la clase Menus
+    //Variable de clase "controlador" para poder acceder a los métodos de las demás clases
     private static Controlador controlador = new Controlador();
 
     public static void menuPrincipal(){
@@ -134,13 +134,11 @@ public class Menus {
         Scanner sc = new Scanner(System.in);
         System.out.println("\n[ESTADO DE RECEPCIÓN]:");
         System.out.println(">> Camiones en espera: ");
-        controlador.getCamiones().imprimir();
         System.out.println(">> Próximo en turno: Placa \n"); // Placa o identificador supongo
         System.out.println("[ESTADO DE INVENTARIO]:");
         //LOGICA PARA MOSTRAR LAS PILAS
         System.out.println("[ESTADO DE LOGÍSTICA]:");
         System.out.println(">> Rutas activas: ");
-        controlador.getRutas().imprimir();
         System.out.println(">> Proximo Destino: "); // Espera valor
         System.out.println(">> Total de paradas programadas: \n"); // Espera valor
 
@@ -164,11 +162,11 @@ public class Menus {
             opcion = sc.nextLine();
 
             switch (opcion) {
-                case "1" -> controlador.getContenedorSeleccionado().agregarProducto();
-                case "2" -> System.out.println("Producto ( " + controlador.getContenedorSeleccionado().eliminarProducto() + " ) eliminado...");
-                case "3" -> controlador.getContenedorSeleccionado().buscarProducto();
-                case "4" -> controlador.getContenedorSeleccionado().mostrarProductos();
-                case "5" -> System.out.printf("Peso total: %.2f", + controlador.getContenedorSeleccionado().calcularPeso());
+                case "1" -> controlador.agregarProducto();
+                case "2" -> System.out.println("Producto eliminado: " + controlador.eliminarProducto());
+                case "3" -> controlador.buscarProducto();
+                case "4" -> System.out.println("Peso total: " + controlador.calcularPesoTotal());
+                case "5" -> controlador.mostrarProductos();
                 case "6" -> { return; }
                 default -> System.out.println("Opción inválida");
             }

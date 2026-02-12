@@ -132,6 +132,12 @@ public class Contenedor {
     public void mostrarProductos(){
         System.out.println("\nProductos del contenedor: ");
 
+        if(productos.vacio()){
+            System.out.println("\nNo hay productos en el contendor...");
+            return;
+        }
+
+        System.out.println("\n=== Productos del contenedor ===");
         Nodo actual = productos.getInicio();
         while (actual != null){
             Object temp = actual.getDato();
