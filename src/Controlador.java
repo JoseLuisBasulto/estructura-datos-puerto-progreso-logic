@@ -1,4 +1,4 @@
-import Colas.ColaCamiones;
+import colas.ColaCamiones;
 import listas.ListaSimple;
 
 public class Controlador {

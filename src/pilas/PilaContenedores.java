@@ -40,6 +40,10 @@ public class PilaContenedores implements Stack {
         }
     }
 
+    public void mostrarContenedores() {
+        lst.imprimir();
+    }
+
     @Override
     public int size() {
         return contador;

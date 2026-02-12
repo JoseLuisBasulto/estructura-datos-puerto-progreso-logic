@@ -1,4 +1,4 @@
-package Colas;
+package colas;
 
 public interface Queue {
     public void enqueue(Object dato);

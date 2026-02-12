@@ -1,6 +1,7 @@
-package Colas;
+package colas;
 import listas.Nodo;
-public class ColaCamiones implements Queue{
+
+public class ColaCamiones implements Queue {
     private Nodo inicio;
     private Nodo fin;
     private int size;

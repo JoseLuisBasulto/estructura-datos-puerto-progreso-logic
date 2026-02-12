@@ -1,10 +1,10 @@
 import java.util.Scanner;
-import Colas.ColaCamiones;
+import colas.ColaCamiones;
 
 public class Menus {
     private static ColaCamiones cola = new ColaCamiones();
     //Variable de clase "controlador" para poder acceder a los métodos de las demás clases
-    private static Controlador controlador = new Controlador();
+    protected static Controlador controlador = new Controlador();
 
     public static void menuPrincipal(){
         Scanner sc = new Scanner(System.in);

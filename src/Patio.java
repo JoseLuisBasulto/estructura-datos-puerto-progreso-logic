@@ -42,7 +42,6 @@ public class Patio {
 
     // Se agrega un contenedor a la pila seleccionada anteriormente, este contenedor ya debió pasar por recepción (módulo A)
     // La función recibe el contenedor elegido y la pila específica que se está modificando. No devuelve nada la función
-    // TODO: Modificar concorde a lo platicado en el scrum
     public void agregarContenedor(PilaContenedores pilaActual, Contenedor contenedor) {
         if (!validarPila(pilaActual)) {
             System.out.println("Esta pila de contenedores llegó a su límite. Registra una nueva pila.");
@@ -54,16 +53,39 @@ public class Patio {
 
     //  Retira del almacén un contenedor particular y le asigna una parada dentro de una ruta existente
     // La función recibe la pila que se seleccionó anteriormente y no devuelve el contenedor que se quiere sacar
-    // TODO: Modificar
-    public Contenedor retirarContenedor(PilaContenedores pilaActual) { // Eliminar contenedor de una pila ya elegida
+
+    public Contenedor retirarContenedor(PilaContenedores pilaActual) {
         Scanner sc = new Scanner(System.in);
+        Contenedor contenedorDeseado = null;
 
         if (pilaActual.isEmpty()) {
             System.out.println("No hay contenedores disponibles para retirar.");
         } else {
-            pilaActual
+            PilaContenedores pilaAuxiliar = new PilaContenedores("aux");
+
+            System.out.println("Contenedores disponibles:");
+            pilaActual.mostrarContenedores();
             System.out.println("Escribe el contenedor que quieres retirar.");
+
+            String cadenaUsuario = sc.nextLine();
+
+            while (!pilaActual.isEmpty() && pilaActual.top().equals(cadenaUsuario)) {
+                pilaAuxiliar.push(pilaActual.pop());
+            }
+
+            if (!pilaActual.isEmpty() && pilaActual.top().equals(cadenaUsuario)) {
+                contenedorDeseado = (Contenedor) pilaActual.pop();
+                // Aquí se le asignaría una ruta en especial
+                System.out.println("El contenedor " + contenedorDeseado + "fue extraído exitosamente!");
+            } else {
+                System.out.println("El contenedor " + cadenaUsuario + " no se encuentra en esta pila de contenedores.");
+            }
+
+            while (!pilaAuxiliar.isEmpty()) {
+                pilaActual.push(pilaAuxiliar.pop());
+            }
         }
+        return contenedorDeseado;
     }
 
     // La función recibe la pila que está siendo modificada y devuelve el contenedor que está al tope
