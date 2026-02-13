@@ -67,11 +67,33 @@ public class ListaSimple extends Lista {
         Nodo actual = inicio;
 
         while (actual != null) {
-            if (actual.getDato().equals(dato)) {
+            if (actual.getDato().toString().equals(dato)) { // Por el toString de Ruta
                 return actual.dato;
             }
             actual = actual.siguiente;
         }
         return null;
     }
+
+     @Override
+     public  Object eliminarEntreNodos(Object dato) {
+         Nodo eliminado = null;
+         if(!vacio()) {
+             if(dato.equals(inicio.getDato())){
+                return eliminaInicio();
+             } else if (dato.equals(ultimo.getDato())) {
+                return eliminaFinal();
+             } else {
+                 Nodo actual = inicio;
+                 while (actual.getSiguiente() != null && !actual.getSiguiente().getDato().equals(dato)) {
+                     actual = actual.getSiguiente();
+                 }
+                 if(actual.getSiguiente() != null) {
+                     eliminado = actual.getSiguiente();
+                     actual.setSiguiente(eliminado.getSiguiente());
+                 }
+             }
+         }
+         return eliminado;
+     }
 }

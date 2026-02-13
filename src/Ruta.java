@@ -5,21 +5,25 @@ import java.util.Scanner;
 
 public class Ruta {
     Scanner sc = new Scanner(System.in);
-    protected ListaDoble rutas;
+    protected ListaDoble paradas;
+    protected String idRuta;
 
-    public Ruta(){
-        rutas = new ListaDoble();
+    public Ruta(String idRuta){ //Crear ruta
+        this.paradas = new ListaDoble();
+        this.idRuta = idRuta;
+        Controlador.rutas.insertaFinal(this); // Pasamos la referencia de este objeto a la listaSimple rutas de Controlador
     }
 
     public void agregarParadaFinal () {
         System.out.print("Ingrese el nombre de la nueva parada: ");
         String parada = sc.nextLine();
 
-        if(valido(parada)) {rutas.insertaFinal(parada);}
+        if(valido(parada)) {
+            paradas.insertaFinal(parada);}
     }
 
     public void agregarEntreParadas () {
-        if(rutas.vacio()) {
+        if(paradas.vacio()) {
             System.out.println("No hay paradas registradas.");
         } else{
             System.out.print("Ingrese el nombre de la nueva parada: ");
@@ -33,13 +37,13 @@ public class Ruta {
             System.out.print("Destino 2: ");
             String parada2 = sc.nextLine();
 
-            rutas.insertaEntreNodos(parada1, parada2, nuevaParada);
+            paradas.insertaEntreNodos(parada1, parada2, nuevaParada);
         }
 
     }
 
     public void eliminarParada () {
-        if(rutas.vacio()) {
+        if(paradas.vacio()) {
             System.out.println("No hay paradas registradas para eliminar.");
             return;
         }
@@ -47,12 +51,12 @@ public class Ruta {
         String paradaEliminada = sc.nextLine();
         if(paradaEliminada.isEmpty()) {System.out.println("Nombre no valido");return; }
 
-        if(paradaEliminada.equals(rutas.getInicio().getDato())) {
-            System.out.println("Parada \""+rutas.eliminaInicio()+"\" Cancelada");
-        } else if (paradaEliminada.equals(rutas.getUltimo().getDato())) {
-            System.out.println("Parada \""+rutas.eliminaFinal()+"\" Cancelada");
+        if(paradaEliminada.equals(paradas.getInicio().getDato())) {
+            System.out.println("Parada \""+ paradas.eliminaInicio()+"\" Cancelada");
+        } else if (paradaEliminada.equals(paradas.getUltimo().getDato())) {
+            System.out.println("Parada \""+ paradas.eliminaFinal()+"\" Cancelada");
         } else {
-            if(rutas.eliminarEntreNodos(paradaEliminada)!= null) {
+            if(paradas.eliminarEntreNodos(paradaEliminada)!= null) {
                 System.out.println("Parada \""+paradaEliminada+"\" Cancelada");
             } else {
                 System.out.println("Para no existente, acción cancelada");
@@ -61,11 +65,11 @@ public class Ruta {
     }
 
     public void simular () {
-        if(rutas.vacio()) {
+        if(paradas.vacio()) {
             System.out.println("No hay nigúin destino trazado");
             return;
         }
-        NodoDoble actual = rutas.getInicio();
+        NodoDoble actual = paradas.getInicio();
         String op;
         System.out.println("Simulación de rutas");
         boolean fin = false;
@@ -109,8 +113,21 @@ public class Ruta {
 
     public boolean valido (String nombre) {
         if(nombre.isEmpty()){System.out.println("Nombre no válido");return false;}
-        else if (rutas.existeNodo(nombre)) {System.out.println("El nombre de la parada ya existe");return false;}
+        else if (paradas.existeNodo(nombre)) {System.out.println("El nombre de la parada ya existe");return false;}
         return true;
     }
+
+    public void eliminarRuta() {
+        while(!paradas.vacio()) {
+            paradas.eliminaInicio();
+        }
+        System.out.println("Ruta Eliminada Con éxito");
+        Controlador.rutas.eliminarEntreNodos(this);
+    }
+    @Override
+    public String toString() {
+        return idRuta;
+    }
+
 
 }

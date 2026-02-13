@@ -110,6 +110,53 @@ public class Menus {
         String opcion;
 
         do {
+            System.out.println("\n[1] Crear nueva ruta");
+            System.out.println("[2] Modificar ruta");
+            System.out.println("[3] Eliminar ruta");
+            System.out.println("[4] Regresar al menu");
+
+            System.out.println("\nSeleccione una opción");
+            opcion = sc.nextLine();
+
+          switch (opcion) {
+                case "1" -> {
+                    System.out.println("Asigne un identificador a su ruta");
+                    String idRuta = sc.nextLine();
+                    if(Controlador.rutas.buscarElemento(idRuta) == null) {
+                        System.out.println("Ruta creada exitosamente!");
+                        new Ruta(idRuta);
+                    } else {
+                        System.out.println("Identificador de ruta existente");
+                    }
+                }
+
+                case "2" -> {
+                    System.out.println("Seleccione la ruta escribiendo su identificador");
+                    Ruta ruta = controlador.ElegirRutas();
+                    if(ruta != null) {
+                        System.out.println("Ruta encontrada!");
+                        modificarRuta(ruta);
+                    }
+                }
+                case "3" -> {
+                    System.out.println("Seleccione la ruta a eliminar escribiendo su identificador");
+                    Ruta ruta = controlador.ElegirRutas();
+                    if(ruta != null) {
+                        System.out.println("Ruta encontrada!");
+                        ruta.eliminarRuta();
+                    }
+                } // Delete Ruta
+                case "4" -> { return; }
+                default -> System.out.println("Opción inválida");
+          }
+        }while (true);
+    }
+
+    public static void modificarRuta(Ruta ruta){
+        Scanner sc = new Scanner(System.in);
+        String opcion;
+
+        do {
             System.out.println("\n[1] Agregar nueva parada al final");
             System.out.println("[2] Insertar parada entre destinos ");
             System.out.println("[3] Cancelar parada");
@@ -119,14 +166,14 @@ public class Menus {
             System.out.println("\nSeleccione una opción");
             opcion = sc.nextLine();
 
-          switch (opcion) {
-                case "1" -> System.out.println("Uno"); // Append
-                case "2" -> System.out.println("Dos");// Insert
-                case "3" -> System.out.println("Tres"); // Delete node
-                case "4" -> System.out.println("Cuatro"); // Navegación anterior/siguiente
+            switch (opcion) {
+                case "1" -> ruta.agregarParadaFinal(); // Append
+                case "2" -> ruta.agregarEntreParadas();// Insert
+                case "3" -> ruta.eliminarParada(); // Delete node
+                case "4" -> ruta.simular(); // Navegación anterior/siguiente
                 case "5" -> { return; }
                 default -> System.out.println("Opción inválida");
-          }
+            }
         }while (true);
     }
 

@@ -22,6 +22,8 @@ public abstract class Lista {
     public abstract Object eliminaInicio ();
     public abstract Object eliminaFinal ();
 
+    public abstract Object eliminarEntreNodos(Object dato);
+
     public boolean vacio(){
         return inicio == null;
     }

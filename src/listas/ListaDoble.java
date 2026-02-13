@@ -74,7 +74,7 @@ public class ListaDoble extends ListaD{
             }
         }
     }
-
+    @Override
     public Object eliminarEntreNodos(Object a) {
         if(!vacio()) {
             NodoDoble actual = inicio;

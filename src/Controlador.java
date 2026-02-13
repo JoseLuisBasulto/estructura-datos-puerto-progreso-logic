@@ -1,17 +1,19 @@
 import colas.ColaCamiones;
 import listas.ListaSimple;
 
+import java.util.Scanner;
+
 public class Controlador {
     private ColaCamiones colaRecepcion;
     private Patio patio;
-    private ListaSimple ListaRutas; // Implementar la clase de ListaRutas
+    protected static ListaSimple rutas; // Implementar la clase de ListaRutas
     private Contenedor contenedorSeleccionado;
 
     // Inicialización de los atributos
     public Controlador(){
         colaRecepcion = new ColaCamiones();
         patio = new Patio();
-        ListaRutas = new ListaSimple();
+        rutas = new ListaSimple();
         contenedorSeleccionado = new Contenedor();
     }
 
@@ -46,6 +48,22 @@ public class Controlador {
         contenedorSeleccionado.mostrarProductos();
     }
 
+    public Ruta ElegirRutas() {
+        if(rutas.vacio()) {
+            System.out.println("No hay rutas registradas");
+            return null;
+        }
+        Scanner  sc = new Scanner(System.in);
+        rutas.imprimir();
+        System.out.println("Escriba el nombre de su ruta");
+        String idRuta = sc.nextLine();
+        Ruta ruta = (Ruta)rutas.buscarElemento(idRuta);
+        if(ruta == null){
+            System.out.println("La ruta \"" + idRuta +"\" no existe");
+        }
+        return ruta;
+    }
+
     // Getters
     public ColaCamiones getColaRecepcion() {
         return colaRecepcion;
@@ -55,8 +73,8 @@ public class Controlador {
         return patio;
     }
 
-    public ListaSimple getListaRutas() {
-        return ListaRutas;
+    public ListaSimple getRutas() {
+        return rutas;
     }
 
     public Contenedor getContenedorSeleccionado() {
