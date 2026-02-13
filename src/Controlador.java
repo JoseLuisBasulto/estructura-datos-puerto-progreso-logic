@@ -6,14 +6,17 @@ import java.util.Scanner;
 
 public class Controlador {
     private ColaCamiones colaRecepcion;
+    private PilaContenedores pilaSeleccionada;
     private Patio patio;
     protected static ListaSimple rutas; // Implementar la clase de ListaRutas
     private Contenedor contenedorSeleccionado;
+    protected ListaSimple almacen;
 
     // Inicialización de los atributos
     public Controlador(){
         colaRecepcion = new ColaCamiones();
         patio = new Patio();
+        pilaSeleccionada = new PilaContenedores();
         rutas = new ListaSimple();
         contenedorSeleccionado = new Contenedor();
     }
@@ -32,11 +35,27 @@ public class Controlador {
         patio.agregarPila();
     }
 
-    public PilaContenedores seleccionarPila(){
-        return patio.seleccionarPila();
+    public void eliminarPila() { patio.eliminarPila();}
+
+    public void seleccionarPila(){
+        setPilaSeleccionada(patio.seleccionarPila());
     }
 
+    public void retirarContenedor(){
+        if (pilaSeleccionada == null) {
+            System.out.println("No es posible realizar esta acción.");
+        } else {
+            setContenedorSeleccionado(patio.retirarContenedor(pilaSeleccionada));
+        }
+    }
 
+    public void agregarContenedor(){
+        patio.agregarContenedor(pilaSeleccionada, contenedorSeleccionado);
+    }
+
+    public void topePilas() {
+        patio.mostrarPilas();
+    }
 
     // Bloque de clase Contenedor
     public void agregarProducto(){
@@ -59,7 +78,7 @@ public class Controlador {
         contenedorSeleccionado.mostrarProductos();
     }
 
-
+    // Bloque de clase Rutas
     public Ruta ElegirRutas() {
         if(rutas.vacio()) {
             System.out.println("No hay rutas registradas");
@@ -93,8 +112,16 @@ public class Controlador {
         return contenedorSeleccionado;
     }
 
+    public PilaContenedores getPilaSeleccionada() {
+        return pilaSeleccionada;
+    }
+
     // Setters
     public void setContenedorSeleccionado(Contenedor contenedorSeleccionado) {
         this.contenedorSeleccionado = contenedorSeleccionado;
+    }
+
+    public void setPilaSeleccionada(PilaContenedores pilaSeleccionada) {
+        this.pilaSeleccionada = pilaSeleccionada;
     }
 }

@@ -1,12 +1,13 @@
 import java.util.Scanner;
 import colas.ColaCamiones;
+import pilas.PilaContenedores;
 
 public class Menus {
     private static ColaCamiones cola = new ColaCamiones();
     //Variable de clase "controlador" para poder acceder a los métodos de las demás clases
     protected static Controlador controlador = new Controlador();
 
-    public static void menuPrincipal(){
+    public static void menuPrincipal() {
         Scanner sc = new Scanner(System.in);
         String opcion;
 
@@ -30,10 +31,10 @@ public class Menus {
                 case "5" -> System.out.println("Saliendo...");
                 default -> System.out.println("Opción inválida");
             }
-        }while(!opcion.equals("5"));
+        } while (!opcion.equals("5"));
     }
 
-    public static void menuZonaRecepcion(){
+    public static void menuZonaRecepcion() {
         Scanner sc = new Scanner(System.in);
         String opcion;
 
@@ -74,13 +75,15 @@ public class Menus {
                     }
                 } // Peek
                 case "4" -> cola.listar(); // Listar la cola
-                case "5" -> { return ;}
+                case "5" -> {
+                    return;
+                }
                 default -> System.out.println("Opción inválida");
             }
         } while (true); // Bucle infinito que solo se sale con el return
     }
 
-    public static void menuPatioContenedores(){
+    public static void menuPatioContenedores() {
         Scanner sc = new Scanner(System.in);
         String opcion;
 
@@ -95,17 +98,19 @@ public class Menus {
             opcion = sc.nextLine();
 
             switch (opcion) {
-                case "1" -> System.out.println("Uno"); // Push a una pila
-                case "2" -> System.out.println("Dos");// Pop de una pila
-                case "3" -> System.out.println("Tres"); // Peek
+                case "1" -> controlador.agregarContenedor(); // Push a una pila
+                case "2" -> controlador.retirarContenedor();// Pop de una pila
+                case "3" -> controlador.topePilas(); // Peek
                 case "4" -> submenuInspeccionarContenedor();
-                case "5" -> { return; }
+                case "5" -> {
+                    return;
+                }
                 default -> System.out.println("Opción inválida");
             }
-        }while (true);
+        } while (true);
     }
 
-    public static void menuDistribucion(){
+    public static void menuDistribucion() {
         Scanner sc = new Scanner(System.in);
         String opcion;
 
@@ -113,16 +118,16 @@ public class Menus {
             System.out.println("\n[1] Crear nueva ruta");
             System.out.println("[2] Modificar ruta");
             System.out.println("[3] Eliminar ruta");
-            System.out.println("[4] Regresar al menu");
+            System.out.println("[4] Regresar al menu principal");
 
             System.out.println("\nSeleccione una opción");
             opcion = sc.nextLine();
 
-          switch (opcion) {
+            switch (opcion) {
                 case "1" -> {
                     System.out.println("Asigne un identificador a su ruta");
                     String idRuta = sc.nextLine();
-                    if(Controlador.rutas.buscarElemento(idRuta) == null) {
+                    if (Controlador.rutas.buscarElemento(idRuta) == null) {
                         System.out.println("Ruta creada exitosamente!");
                         new Ruta(idRuta);
                     } else {
@@ -133,7 +138,7 @@ public class Menus {
                 case "2" -> {
                     System.out.println("Seleccione la ruta escribiendo su identificador");
                     Ruta ruta = controlador.ElegirRutas();
-                    if(ruta != null) {
+                    if (ruta != null) {
                         System.out.println("Ruta encontrada!");
                         modificarRuta(ruta);
                     }
@@ -141,18 +146,20 @@ public class Menus {
                 case "3" -> {
                     System.out.println("Seleccione la ruta a eliminar escribiendo su identificador");
                     Ruta ruta = controlador.ElegirRutas();
-                    if(ruta != null) {
+                    if (ruta != null) {
                         System.out.println("Ruta encontrada!");
                         ruta.eliminarRuta();
                     }
                 } // Delete Ruta
-                case "4" -> { return; }
+                case "4" -> {
+                    return;
+                }
                 default -> System.out.println("Opción inválida");
-          }
-        }while (true);
+            }
+        } while (true);
     }
 
-    public static void modificarRuta(Ruta ruta){
+    public static void modificarRuta(Ruta ruta) {
         Scanner sc = new Scanner(System.in);
         String opcion;
 
@@ -161,7 +168,7 @@ public class Menus {
             System.out.println("[2] Insertar parada entre destinos ");
             System.out.println("[3] Cancelar parada");
             System.out.println("[4] Simular recorrido");
-            System.out.println("[5] Volver al Menú Principal");
+            System.out.println("[5] Regresar");
 
             System.out.println("\nSeleccione una opción");
             opcion = sc.nextLine();
@@ -171,13 +178,15 @@ public class Menus {
                 case "2" -> ruta.agregarEntreParadas();// Insert
                 case "3" -> ruta.eliminarParada(); // Delete node
                 case "4" -> ruta.simular(); // Navegación anterior/siguiente
-                case "5" -> { return; }
+                case "5" -> {
+                    return;
+                }
                 default -> System.out.println("Opción inválida");
             }
-        }while (true);
+        } while (true);
     }
 
-    public static void menuReporteGeneral(){
+    public static void menuReporteGeneral() {
         Scanner sc = new Scanner(System.in);
         System.out.println("\n[ESTADO DE RECEPCIÓN]:");
         System.out.println(">> Camiones en espera: ");
@@ -193,38 +202,45 @@ public class Menus {
         sc.nextLine(); //Espera la entrada y se regresa
     }
 
-    public static void submenuInspeccionarContenedor(){
+    public static void submenuInspeccionarContenedor() {
         Scanner sc = new Scanner(System.in);
         String opcion;
-        do {
-            System.out.println("\n[1] Agregar producto");
-            System.out.println("[2] Eliminar Producto");
-            System.out.println("[3] Buscar Producto");
-            System.out.println("[4] Calcular peso total");
-            System.out.println("[5] Mostrar Productos");
-            System.out.println("[6] Regresar");
 
-            System.out.println("\nSeleccione una opción");
-            opcion = sc.nextLine();
+        controlador.seleccionarPila();
+        controlador.retirarContenedor();
 
-            switch (opcion) {
-                case "1" -> controlador.agregarProducto();
-                case "2" -> {
-                    Producto prod = controlador.eliminarProducto();
-                    if(prod == null){
-                        System.out.println("\nNo existe este producto...");
-                    }else{
-                        System.out.println("\nProducto con ID: (" + prod.getId() + ") eliminado");
+        if (controlador.getPilaSeleccionada() != null) {
+            do {
+                System.out.println("\n[1] Agregar producto");
+                System.out.println("[2] Eliminar Producto");
+                System.out.println("[3] Buscar Producto");
+                System.out.println("[4] Calcular peso total");
+                System.out.println("[5] Mostrar Productos");
+                System.out.println("[6] Regresar");
+
+                System.out.println("\nSeleccione una opción");
+                opcion = sc.nextLine();
+
+                switch (opcion) {
+                    case "1" -> controlador.agregarProducto();
+                    case "2" -> {
+                        Producto prod = controlador.eliminarProducto();
+                        if (prod == null) {
+                            System.out.println("\nNo existe este producto...");
+                        } else {
+                            System.out.println("\nProducto con ID: (" + prod.getId() + ") eliminado");
+                        }
                     }
+                    case "3" -> controlador.buscarProducto();
+                    case "4" -> System.out.println("Peso total: " + controlador.calcularPesoTotal());
+                    case "5" -> controlador.mostrarProductos();
+                    case "6" -> {
+                        controlador.agregarContenedor();
+                        return;
+                    }
+                    default -> System.out.println("Opción inválida");
                 }
-                case "3" -> controlador.buscarProducto();
-                case "4" -> System.out.println("Peso total: " + controlador.calcularPesoTotal());
-                case "5" -> controlador.mostrarProductos();
-                case "6" -> {
-                    return;
-                }
-                default -> System.out.println("Opción inválida");
-            }
-        }while (true);
+            } while (true);
+        }
     }
 }

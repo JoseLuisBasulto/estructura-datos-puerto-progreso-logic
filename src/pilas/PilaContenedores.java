@@ -4,19 +4,19 @@ import listas.ListaSimple;
 
 public class PilaContenedores implements Stack {
     protected ListaSimple lst;
-    protected int contador;
     protected String nombre;
+    protected int contador;
 
     public PilaContenedores(){
-        lst = new ListaSimple();
+        this.nombre = null;
         contador = 0;
-        this.nombre = "SIN NOMBRE ASIGNADO";
+        lst = new ListaSimple();
     }
 
     public PilaContenedores(String nombre) {
-        lst = new ListaSimple();
-        contador = 0;
         this.nombre = nombre;
+        contador = 0;
+        lst = new ListaSimple();
     }
 
     @Override
@@ -46,10 +46,6 @@ public class PilaContenedores implements Stack {
         }
     }
 
-    public void mostrarContenedores() {
-        lst.imprimir();
-    }
-
     @Override
     public int size() {
         return contador;
@@ -71,5 +67,9 @@ public class PilaContenedores implements Stack {
     @Override
     public String toString() {
         return nombre;
+    }
+
+    public void mostrarContenedores() {
+        lst.imprimir();
     }
 }
