@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 public class Contenedor {
     private String id;
-    private Ruta ruta;
     private ListaSimple productos;
 
     public Contenedor(){
@@ -30,35 +29,20 @@ public class Contenedor {
 
     // Método que no recibe parámetros, devuelve un valor double que es el peso del contenedor
     public double calcularPeso(){
-        double peso = 0.0;
+        double peso = 0.0; // Acumulador para el peso total
 
         if(!productos.vacio()){
             Nodo actual = productos.getInicio();
             while (actual != null){
                 Producto prod = (Producto) actual.getDato(); //Casteo necesario para poder trabajar con tipo Producto
 
-                peso += prod.getPeso();
+                peso += prod.getPeso(); // Se suman las cantidades
 
                 actual = actual.getSiguiente();
             }
         }
 
         return peso;
-    }
-
-    //Método que recibe un String (identificador) y busca dicho id en la lista de productos, devolviendo un booleano para determinar su existencia
-    public boolean existeProducto(String id){
-        Nodo actual = productos.getInicio();
-        while (actual != null){
-            Producto prod = (Producto) actual.getDato(); // Casteo necesario para poder trabajar con tipo Producto
-
-            if(prod.getId().equals(id)){
-                return true; // Se retorna true en caso de econtrar el producto
-            }
-
-            actual = actual.getSiguiente();
-        }
-        return false; // Se retorna false si no se encuentra el producto
     }
 
     // Método que busca un producto en la lista productos, no recibe parámetros y muestra un mensaje dependiendo el resultado
@@ -68,19 +52,14 @@ public class Contenedor {
         System.out.println("\nIngrese el id del producto a buscar: ");
         String id = sc.nextLine();
 
-        if(existeProducto(id)){
-            Nodo actual = productos.getInicio();
-            Producto prod = (Producto) actual.getDato(); // Casteo necesario para poder trabajar con tipo Producto
+        Producto prod = (Producto) productos.buscarElemento(id); // Se usa el método buscarElemento que devuelve un objeto
 
-            while (!prod.getId().equals(id)){ // Mientras no se encuentre el producto se avanza
-                actual = actual.getSiguiente(); // Avanzamos entre los productos
-                prod = (Producto) actual.getDato(); // Guardamos el id del producto
-            }
-            System.out.println("Producto Econtrado!");
-            System.out.println(prod);
-            return;
+        if(prod == null){
+            System.out.println("\nEl producto no existe o el contenedor esta vacío...");
+        }else{
+            System.out.println("Producto econtrado!");
+            System.out.println("ID: " + prod.getId() + ", Nombre: " + prod.getNombre() + ", Peso: " + prod.getPeso() + " Kg");
         }
-        System.out.println("\nProducto no econtrado...");
     }
 
     //Método que elimina un producto de la lista, no tiene parámetros y devuelve el producto eliminado
@@ -91,7 +70,7 @@ public class Contenedor {
         System.out.println("\nIngrese el id del producto a eliminar: ");
         String id = sc.nextLine();
 
-        if(existeProducto(id)) { //Si existe el producto
+        if(productos.buscarElemento(id) != null) { //Si existe el producto
             Nodo actual = productos.getInicio();
             Producto prod = (Producto) actual.getDato();
 
@@ -130,9 +109,7 @@ public class Contenedor {
 
     //Método que no recibe parámetros, simplemente recorre toda la lista de productos e imprime el producto
     public void mostrarProductos(){
-        System.out.println("\nProductos del contenedor: ");
-
-        if(productos.vacio()){
+        if(productos.vacio()){ //Si la lista de  productos está vacía
             System.out.println("\nNo hay productos en el contendor...");
             return;
         }
@@ -143,7 +120,7 @@ public class Contenedor {
             Object temp = actual.getDato();
             Producto prod = (Producto) temp; // Casteo necesario para poder trabajar con tipo Producto
 
-            System.out.println(prod);
+            System.out.println("ID: " + prod.getId() + ", Nombre: " + prod.getNombre() + ", Peso: " + prod.getPeso() + " Kg");
             actual = actual.getSiguiente();
         }
     }
@@ -155,14 +132,6 @@ public class Contenedor {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public Ruta getRuta() {
-        return ruta;
-    }
-
-    public void setRuta(Ruta ruta) {
-        this.ruta = ruta;
     }
 
     public ListaSimple getProductos() {

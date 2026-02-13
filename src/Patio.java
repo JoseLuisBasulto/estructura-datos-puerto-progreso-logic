@@ -50,11 +50,43 @@ public class Patio {
         }
     }
 
+    // Retira un contenedor en particular, recibe una pila de la cual se extrae el contenedor y lo devuelve
+    public Contenedor retirarContenedorParaModificar(PilaContenedores pilaActual){
+        Scanner sc = new Scanner(System.in);
+        Contenedor contenedorDeseado = null;
+
+        if (pilaActual.isEmpty()) {
+            System.out.println("No hay contenedores disponibles para retirar.");
+        } else {
+            PilaContenedores pilaAuxiliar = new PilaContenedores("aux");
+
+            System.out.println("Contenedores disponibles:");
+            pilaActual.mostrarContenedores();
+            System.out.println("Escribe el contenedor que quieres retirar.");
+
+            String cadenaUsuario = sc.nextLine();
+
+            while (!pilaActual.isEmpty() && pilaActual.top().equals(cadenaUsuario)) {
+                pilaAuxiliar.push(pilaActual.pop());
+            }
+
+            if (!pilaActual.isEmpty() && pilaActual.top().equals(cadenaUsuario)) {
+                contenedorDeseado = (Contenedor) pilaActual.pop();
+                System.out.println("El contenedor " + contenedorDeseado + "fue extraído exitosamente!");
+            } else {
+                System.out.println("El contenedor " + cadenaUsuario + " no se encuentra en esta pila de contenedores.");
+            }
+
+            while (!pilaAuxiliar.isEmpty()) {
+                pilaActual.push(pilaAuxiliar.pop());
+            }
+        }
+        return contenedorDeseado;
+    }
 
     //  Retira del almacén un contenedor particular y le asigna una parada dentro de una ruta existente
     // La función recibe la pila que se seleccionó anteriormente y no devuelve el contenedor que se quiere sacar
-
-    public Contenedor retirarContenedor(PilaContenedores pilaActual) {
+    public Contenedor retirarContenedorParaAsignarRuta(PilaContenedores pilaActual) {
         Scanner sc = new Scanner(System.in);
         Contenedor contenedorDeseado = null;
 

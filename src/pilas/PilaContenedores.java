@@ -7,6 +7,12 @@ public class PilaContenedores implements Stack {
     protected int contador;
     protected String nombre;
 
+    public PilaContenedores(){
+        lst = new ListaSimple();
+        contador = 0;
+        this.nombre = "SIN NOMBRE ASIGNADO";
+    }
+
     public PilaContenedores(String nombre) {
         lst = new ListaSimple();
         contador = 0;

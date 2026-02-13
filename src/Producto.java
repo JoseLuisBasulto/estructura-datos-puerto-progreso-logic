@@ -16,7 +16,7 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "ID: " + getId() + ", Nombre: " + getNombre() + ", Peso: " + getPeso() + " Kg";
+        return getId();
     }
 
     //Setters y Getters

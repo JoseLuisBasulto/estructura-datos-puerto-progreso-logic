@@ -1,5 +1,6 @@
 import colas.ColaCamiones;
 import listas.ListaSimple;
+import pilas.PilaContenedores;
 
 import java.util.Scanner;
 
@@ -26,8 +27,18 @@ public class Controlador {
         //JB MOMENTO PARA DEQUEUE
     }
 
+    // Bloque de clase Patio
+    public void agregarPila(){
+        patio.agregarPila();
+    }
 
-    //Bloque de clase Contenedor
+    public PilaContenedores seleccionarPila(){
+        return patio.seleccionarPila();
+    }
+
+
+
+    // Bloque de clase Contenedor
     public void agregarProducto(){
         contenedorSeleccionado.agregarProducto();
     }
@@ -48,6 +59,7 @@ public class Controlador {
         contenedorSeleccionado.mostrarProductos();
     }
 
+
     public Ruta ElegirRutas() {
         if(rutas.vacio()) {
             System.out.println("No hay rutas registradas");
@@ -55,11 +67,11 @@ public class Controlador {
         }
         Scanner  sc = new Scanner(System.in);
         rutas.imprimir();
-        System.out.println("Escriba el nombre de su ruta");
+        System.out.println("\nEscriba el nombre de su ruta");
         String idRuta = sc.nextLine();
         Ruta ruta = (Ruta)rutas.buscarElemento(idRuta);
         if(ruta == null){
-            System.out.println("La ruta \"" + idRuta +"\" no existe");
+            System.out.println("\nLa ruta \"" + idRuta +"\" no existe");
         }
         return ruta;
     }
@@ -79,5 +91,10 @@ public class Controlador {
 
     public Contenedor getContenedorSeleccionado() {
         return contenedorSeleccionado;
+    }
+
+    // Setters
+    public void setContenedorSeleccionado(Contenedor contenedorSeleccionado) {
+        this.contenedorSeleccionado = contenedorSeleccionado;
     }
 }

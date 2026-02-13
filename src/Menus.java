@@ -196,7 +196,6 @@ public class Menus {
     public static void submenuInspeccionarContenedor(){
         Scanner sc = new Scanner(System.in);
         String opcion;
-
         do {
             System.out.println("\n[1] Agregar producto");
             System.out.println("[2] Eliminar Producto");
@@ -210,11 +209,20 @@ public class Menus {
 
             switch (opcion) {
                 case "1" -> controlador.agregarProducto();
-                case "2" -> System.out.println("Producto eliminado: " + controlador.eliminarProducto());
+                case "2" -> {
+                    Producto prod = controlador.eliminarProducto();
+                    if(prod == null){
+                        System.out.println("\nNo existe este producto...");
+                    }else{
+                        System.out.println("\nProducto con ID: (" + prod.getId() + ") eliminado");
+                    }
+                }
                 case "3" -> controlador.buscarProducto();
                 case "4" -> System.out.println("Peso total: " + controlador.calcularPesoTotal());
                 case "5" -> controlador.mostrarProductos();
-                case "6" -> { return; }
+                case "6" -> {
+                    return;
+                }
                 default -> System.out.println("Opción inválida");
             }
         }while (true);
