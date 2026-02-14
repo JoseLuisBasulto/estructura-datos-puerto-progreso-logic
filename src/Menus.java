@@ -4,7 +4,6 @@ import pilas.PilaContenedores;
 
 public class Menus {
     private static ColaCamiones cola = new ColaCamiones();
-    //Variable de clase "controlador" para poder acceder a los métodos de las demás clases
     protected static Controlador controlador = new Controlador();
 
     public static void menuPrincipal() {
@@ -29,7 +28,7 @@ public class Menus {
                 case "3" -> menuDistribucion();
                 case "4" -> menuReporteGeneral();
                 case "5" -> System.out.println("Saliendo...");
-                default -> System.out.println("Opción inválida");
+                default -> System.out.println("Opción inválida.");
             }
         } while (!opcion.equals("5"));
     }
@@ -78,7 +77,7 @@ public class Menus {
                 case "5" -> {
                     return;
                 }
-                default -> System.out.println("Opción inválida");
+                default -> System.out.println("Opción inválida.");
             }
         } while (true); // Bucle infinito que solo se sale con el return
     }
@@ -88,24 +87,36 @@ public class Menus {
         String opcion;
 
         do {
-            System.out.println("\n[1] Ingresar contenedor desde Recepción");
-            System.out.println("[2] Retirar contenedor para Ruta");
-            System.out.println("[3] Ver tope de las pilas");
-            System.out.println("[4] Inspeccionar contenedor");
-            System.out.println("[5] Volver al Menú Principal");
+            System.out.println("\n[1] Ingresar Contenedor desde Recepción");
+            System.out.println("[2] Retirar Contenedor para Ruta");
+            System.out.println("[3] Ver el tope de las Pilas");
+            System.out.println("[4] Inspeccionar Contenedor");
+            System.out.println("[5] Registrar Pila de Contenedores");
+            System.out.println("[6] Eliminar Pila de Contenedores");
+            System.out.println("[7] Volver al Menú Principal");
 
             System.out.println("\nSeleccione una opción");
             opcion = sc.nextLine();
 
             switch (opcion) {
-                case "1" -> controlador.agregarContenedor(); // Push a una pila
-                case "2" -> controlador.retirarContenedor();// Pop de una pila
-                case "3" -> controlador.topePilas(); // Peek
-                case "4" -> submenuInspeccionarContenedor();
-                case "5" -> {
-                    return;
+                case "1" -> {
+                    controlador.seleccionarPila();
+                    if (controlador.getPilaSeleccionada() != null) {
+                        controlador.agregarContenedor();
+                    }
                 }
-                default -> System.out.println("Opción inválida");
+                case "2" -> {
+                    controlador.seleccionarPila();
+                    if (controlador.getPilaSeleccionada() != null) {
+                        controlador.retirarContenedor();
+                    }
+                }
+                case "3" -> controlador.topePilas();
+                case "4" -> submenuInspeccionarContenedor();
+                case "5" -> controlador.agregarPila();
+                case "6" -> controlador.eliminarPila();
+                case "7" -> { return; }
+                default -> System.out.println("Opción inválida.");
             }
         } while (true);
     }
@@ -125,18 +136,18 @@ public class Menus {
 
             switch (opcion) {
                 case "1" -> {
-                    System.out.println("Asigne un identificador a su ruta");
+                    System.out.println("Asigne un identificador a su ruta:");
                     String idRuta = sc.nextLine();
                     if (Controlador.rutas.buscarElemento(idRuta) == null) {
                         System.out.println("Ruta creada exitosamente!");
                         new Ruta(idRuta);
                     } else {
-                        System.out.println("Identificador de ruta existente");
+                        System.out.println("Identificador de ruta existente.");
                     }
                 }
 
                 case "2" -> {
-                    System.out.println("Seleccione la ruta escribiendo su identificador");
+                    System.out.println("Seleccione la ruta escribiendo su identificador:");
                     Ruta ruta = controlador.ElegirRutas();
                     if (ruta != null) {
                         System.out.println("Ruta encontrada!");
@@ -144,7 +155,7 @@ public class Menus {
                     }
                 }
                 case "3" -> {
-                    System.out.println("Seleccione la ruta a eliminar escribiendo su identificador");
+                    System.out.println("Seleccione la ruta a eliminar escribiendo su identificador:");
                     Ruta ruta = controlador.ElegirRutas();
                     if (ruta != null) {
                         System.out.println("Ruta encontrada!");
@@ -154,7 +165,7 @@ public class Menus {
                 case "4" -> {
                     return;
                 }
-                default -> System.out.println("Opción inválida");
+                default -> System.out.println("Opción inválida.");
             }
         } while (true);
     }
@@ -165,12 +176,12 @@ public class Menus {
 
         do {
             System.out.println("\n[1] Agregar nueva parada al final");
-            System.out.println("[2] Insertar parada entre destinos ");
+            System.out.println("[2] Insertar parada entre destinos");
             System.out.println("[3] Cancelar parada");
             System.out.println("[4] Simular recorrido");
             System.out.println("[5] Regresar");
 
-            System.out.println("\nSeleccione una opción");
+            System.out.println("\nSeleccione una opción:");
             opcion = sc.nextLine();
 
             switch (opcion) {
@@ -181,7 +192,7 @@ public class Menus {
                 case "5" -> {
                     return;
                 }
-                default -> System.out.println("Opción inválida");
+                default -> System.out.println("Opción inválida.");
             }
         } while (true);
     }

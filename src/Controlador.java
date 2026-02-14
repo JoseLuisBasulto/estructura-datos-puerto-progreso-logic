@@ -56,7 +56,6 @@ public class Controlador {
     public void topePilas() {
         patio.mostrarPilas();
     }
-
     // Bloque de clase Contenedor
     public void agregarProducto(){
         contenedorSeleccionado.agregarProducto();

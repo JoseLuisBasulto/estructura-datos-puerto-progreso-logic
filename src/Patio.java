@@ -14,17 +14,25 @@ public class Patio {
     public void agregarPila() {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Ingrese nombre de la nueva pila: ");
+        System.out.println("Ingrese el nombre de la nueva pila: ");
         String nombre = sc.nextLine();
-        almacen.insertaFinal(new PilaContenedores(nombre));
+
+        if (nombre.isEmpty()) {
+            System.out.println("Nombre inválido.");
+        } else if (almacen.buscarElemento(nombre) != null) {
+            System.out.println("Esta pila ya está registrada en el patio.");
+        } else {
+            almacen.insertaFinal(new PilaContenedores(nombre));
+            System.out.println("Pila registrada con éxito!");
+        }
     }
 
+    // Elimina una pila vacía de la lista de pilas. La función no recibe ni devuelve ningún argumento.
     public void eliminarPila() {
         Scanner sc = new Scanner(System.in);
 
         if (almacen.vacio()) {
             System.out.println("No hay pilas registradas.");
-            return;
         } else {
             System.out.println("Pilas registradas:");
             almacen.imprimir();
@@ -35,7 +43,6 @@ public class Patio {
 
             if (pilaSeleccionada == null ) {
                 System.out.println("La pila indicada no existe.");
-                return;
             } else {
                 if (!pilaSeleccionada.isEmpty()) {
                     System.out.println("La pila seleccionada aún tiene contenedores registrados.");
@@ -64,10 +71,10 @@ public class Patio {
             PilaContenedores pilaSeleccionada = (PilaContenedores) almacen.buscarElemento(cadenaUsuario);
 
             if (pilaSeleccionada == null ) {
-                System.out.println("La pila indicada no existe.");
+                System.out.println("La pila " + cadenaUsuario + " no existe.");
                 return null;
             } else {
-                System.out.println("Pila encontrada!");
+                System.out.println("Pila " + pilaSeleccionada + " encontrada!");
                 return pilaSeleccionada;
             }
         }
@@ -80,7 +87,7 @@ public class Patio {
             System.out.println("No hay pilas registradas.");
         } else if (!validarPila(pilaActual)) {
             System.out.println("Esta pila de contenedores llegó a su límite. Registra una nueva pila.");
-        } else {
+        } else { // TODO
             pilaActual.push(contenedor);
         }
     }
@@ -92,9 +99,9 @@ public class Patio {
         Contenedor contenedorDeseado = null;
 
         if (pilaActual.isEmpty()) {
-            System.out.println("No hay contenedores disponibles para retirar.");
+            System.out.println("No hay contenedores disponibles para retirar en esta pila.");
         } else {
-            PilaContenedores pilaAuxiliar = new PilaContenedores("aux");
+            PilaContenedores pilaAuxiliar = new PilaContenedores();
 
             System.out.println("Contenedores disponibles:");
             pilaActual.mostrarContenedores();
@@ -106,7 +113,7 @@ public class Patio {
                 pilaAuxiliar.push(pilaActual.pop());
             }
 
-            if (!pilaActual.isEmpty() && pilaActual.top().equals(cadenaUsuario)) {
+            if (!pilaActual.isEmpty() && pilaActual.top().equals(cadenaUsuario)) { // TODO
                 contenedorDeseado = (Contenedor) pilaActual.pop();
                 System.out.println("El contenedor " + contenedorDeseado + "fue extraído exitosamente!");
             } else {
@@ -122,14 +129,18 @@ public class Patio {
 
     public void mostrarPilas() {
         if (almacen.vacio()) {
-            System.out.println("No hay pilas disponiles en el almacén.");
+            System.out.println("No hay pilas registradas en el Patio..");
         }  else {
-            System.out.println("\n=== Topes de las Pilas ===");
+            System.out.println("\n=== Tope de las Pilas ===");
             Nodo actual = almacen.getInicio();
             while (actual != null){
                 Object temp = actual.getDato();
                 PilaContenedores pilaActual = (PilaContenedores) temp;
-                System.out.println("Nombre: " + pilaActual + " Tope: " + pilaActual.top());
+                if (pilaActual.top() == null) {
+                    System.out.println("Nombre: " + pilaActual + " Tope: Sin tope");
+                } else {
+                    System.out.println("Nombre: " + pilaActual + " Tope: " + pilaActual.top());
+                }
                 actual = actual.getSiguiente();
             }
         }

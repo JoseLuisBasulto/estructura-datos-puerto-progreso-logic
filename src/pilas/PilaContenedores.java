@@ -28,7 +28,6 @@ public class PilaContenedores implements Stack {
     @Override
     public Object pop() {
         if (lst.vacio()) {
-            System.out.println("Pila vacía");
             return null;
         } else {
             contador--;
@@ -39,7 +38,6 @@ public class PilaContenedores implements Stack {
     @Override
     public Object top() {
         if (lst.vacio()) {
-            System.out.println("Pila vacía");
             return null;
         } else {
             return lst.getInicio().getDato();
