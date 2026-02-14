@@ -8,7 +8,7 @@ public class Controlador {
     private ColaCamiones colaRecepcion;
     private PilaContenedores pilaSeleccionada;
     private Patio patio;
-    protected static ListaSimple rutas; // Implementar la clase de ListaRutas
+    private  ListaRutas rutas;
     private Contenedor contenedorSeleccionado;
     protected ListaSimple almacen;
 
@@ -17,7 +17,7 @@ public class Controlador {
         colaRecepcion = new ColaCamiones();
         patio = new Patio();
         pilaSeleccionada = new PilaContenedores();
-        rutas = new ListaSimple();
+        rutas = new ListaRutas();
         contenedorSeleccionado = new Contenedor();
     }
 
@@ -77,23 +77,6 @@ public class Controlador {
         contenedorSeleccionado.mostrarProductos();
     }
 
-    // Bloque de clase Rutas
-    public Ruta ElegirRutas() {
-        if(rutas.vacio()) {
-            System.out.println("No hay rutas registradas");
-            return null;
-        }
-        Scanner  sc = new Scanner(System.in);
-        rutas.imprimir();
-        System.out.println("\nEscriba el nombre de su ruta");
-        String idRuta = sc.nextLine();
-        Ruta ruta = (Ruta)rutas.buscarElemento(idRuta);
-        if(ruta == null){
-            System.out.println("\nLa ruta \"" + idRuta +"\" no existe");
-        }
-        return ruta;
-    }
-
     // Getters
     public ColaCamiones getColaRecepcion() {
         return colaRecepcion;
@@ -103,7 +86,7 @@ public class Controlador {
         return patio;
     }
 
-    public ListaSimple getRutas() {
+    public ListaRutas getRutas() {
         return rutas;
     }
 

@@ -5,13 +5,12 @@ import java.util.Scanner;
 
 public class Ruta {
     Scanner sc = new Scanner(System.in);
-    protected ListaDoble paradas;
-    protected String idRuta;
+    private ListaDoble paradas;
+    private String idRuta;
 
     public Ruta(String idRuta){ //Crear ruta
         this.paradas = new ListaDoble();
         this.idRuta = idRuta;
-        Controlador.rutas.insertaFinal(this); // Pasamos la referencia de este objeto a la listaSimple rutas de Controlador
     }
 
     public void agregarParadaFinal () {
@@ -78,12 +77,12 @@ public class Ruta {
             if(actual.getSiguiente() == null) { fin = true; }
             if(actual.getAnterior() == null) { inicio = true; }
             if(!fin || inicio) {
-               System.out.println("Parada actual -> " + actual.getDato() + ((inicio) ? " (Inicio) ":""));
-               System.out.print("[1] Siguiente parada\n[2] Anterior parada\n[3] Salir\nOpcion: ");
-           } else {
-               System.out.println("Parada actual -> " + actual.getDato() + " (Final)");
-               System.out.print("[1] Siguiente parada\n[2] Anterior parada\n[3] Salir\nOpcion: ");
-           }
+                System.out.println("Parada actual -> " + actual.getDato() + ((inicio) ? " (Inicio) ":""));
+                System.out.print("[1] Siguiente parada\n[2] Anterior parada\n[3] Salir\nOpcion: ");
+            } else {
+                System.out.println("Parada actual -> " + actual.getDato() + " (Final)");
+                System.out.print("[1] Siguiente parada\n[2] Anterior parada\n[3] Salir\nOpcion: ");
+            }
             op = sc.nextLine();
             switch (op) {
                 case "1" -> {
@@ -117,17 +116,17 @@ public class Ruta {
         return true;
     }
 
-    public void eliminarRuta() {
-        while(!paradas.vacio()) {
-            paradas.eliminaInicio();
-        }
-        System.out.println("Ruta Eliminada Con éxito");
-        Controlador.rutas.eliminarEntreNodos(this);
-    }
     @Override
     public String toString() {
         return idRuta;
     }
 
 
+    public ListaDoble getParadas() {
+        return paradas;
+    }
+
+    public String getIdRuta() {
+        return idRuta;
+    }
 }

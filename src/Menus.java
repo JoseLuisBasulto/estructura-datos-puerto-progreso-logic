@@ -138,9 +138,9 @@ public class Menus {
                 case "1" -> {
                     System.out.println("Asigne un identificador a su ruta:");
                     String idRuta = sc.nextLine();
-                    if (Controlador.rutas.buscarElemento(idRuta) == null) {
+                    if (controlador.getRutas().getListaRutas().buscarElemento(idRuta) == null) {
                         System.out.println("Ruta creada exitosamente!");
-                        new Ruta(idRuta);
+                        controlador.getRutas().crearRuta(idRuta);
                     } else {
                         System.out.println("Identificador de ruta existente.");
                     }
@@ -148,7 +148,7 @@ public class Menus {
 
                 case "2" -> {
                     System.out.println("Seleccione la ruta escribiendo su identificador:");
-                    Ruta ruta = controlador.ElegirRutas();
+                    Ruta ruta = controlador.getRutas().ElegirRutas();
                     if (ruta != null) {
                         System.out.println("Ruta encontrada!");
                         modificarRuta(ruta);
@@ -156,10 +156,10 @@ public class Menus {
                 }
                 case "3" -> {
                     System.out.println("Seleccione la ruta a eliminar escribiendo su identificador:");
-                    Ruta ruta = controlador.ElegirRutas();
+                    Ruta ruta = controlador.getRutas().ElegirRutas();
                     if (ruta != null) {
                         System.out.println("Ruta encontrada!");
-                        ruta.eliminarRuta();
+                        controlador.getRutas().eliminarRuta(ruta);
                     }
                 } // Delete Ruta
                 case "4" -> {
