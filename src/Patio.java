@@ -70,7 +70,7 @@ public class Patio {
             String cadenaUsuario = sc.nextLine();
             PilaContenedores pilaSeleccionada = (PilaContenedores) almacen.buscarElemento(cadenaUsuario);
 
-            if (pilaSeleccionada == null ) {
+            if (pilaSeleccionada == null) {
                 System.out.println("La pila " + cadenaUsuario + " no existe.");
                 return null;
             } else {
@@ -113,7 +113,7 @@ public class Patio {
                 pilaAuxiliar.push(pilaActual.pop());
             }
 
-            if (!pilaActual.isEmpty() && pilaActual.top().equals(cadenaUsuario)) { // TODO
+            if (!pilaActual.isEmpty() && pilaActual.top().equals(cadenaUsuario)) {
                 contenedorDeseado = (Contenedor) pilaActual.pop();
                 System.out.println("El contenedor " + contenedorDeseado + "fue extraído exitosamente!");
             } else {

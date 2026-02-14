@@ -37,11 +37,11 @@ public class Menus {
         String opcion;
 
         do {
-            System.out.println("\n[1] Registrar llegada de camión");
-            System.out.println("[2] Dar ingreso a patio");
-            System.out.println("[3] Ver próximo camión a atender");
-            System.out.println("[4] Listar todos los camiones en espera");
-            System.out.println("[5] Volver al Menú Principal");
+            System.out.println("\n[1] REGISTRAR LLEGADA DE CAMIÓN");
+            System.out.println("[2] DAR INGRESO A PATIO");
+            System.out.println("[3] VER PRÓXIMO CAMIÓN A ATENDER");
+            System.out.println("[4] LISTAR TODOS LOS CAMIONES EN ESPERA");
+            System.out.println("[5] VOLVER AL MENÚ PRINCIPAL");
 
             System.out.println("\nSeleccione una opción:");
             opcion = sc.nextLine();
@@ -62,13 +62,13 @@ public class Menus {
         String opcion;
 
         do {
-            System.out.println("\n[1] Ingresar Contenedor desde Recepción");
-            System.out.println("[2] Retirar Contenedor para Ruta");
-            System.out.println("[3] Ver el tope de las Pilas");
-            System.out.println("[4] Inspeccionar Contenedor");
-            System.out.println("[5] Registrar Pila de Contenedores");
-            System.out.println("[6] Eliminar Pila de Contenedores");
-            System.out.println("[7] Volver al Menú Principal");
+            System.out.println("\n[1] INGRESAR CONTENEDOR DESDE RECEPCIÓN");
+            System.out.println("[2] RETIRAR CONTENEDOR PARA RUTA");
+            System.out.println("[3] VER EL TOPE DE LAS PILAS");
+            System.out.println("[4] INSPECCIONAR CONTENEDOR");
+            System.out.println("[5] REGISTRAR PILA DE CONTENEDORES");
+            System.out.println("[6] ELIMINAR PILA DE CONTENEDORES");
+            System.out.println("[7] VOLVER AL MENÚ PRINCIPAL");
 
             System.out.println("\nSeleccione una opción");
             opcion = sc.nextLine();
@@ -84,6 +84,7 @@ public class Menus {
                     controlador.seleccionarPila();
                     if (controlador.getPilaSeleccionada() != null) {
                         controlador.retirarContenedor();
+                        controlador.asignarRuta(controlador.getContenedorSeleccionado(), controlador.getRutaSeleccionada());
                     }
                 }
                 case "3" -> controlador.topePilas();
@@ -101,12 +102,12 @@ public class Menus {
         String opcion;
 
         do {
-            System.out.println("\n[1] Crear nueva ruta");
-            System.out.println("[2] Modificar ruta");
-            System.out.println("[3] Eliminar ruta");
-            System.out.println("[4] Regresar al menu principal");
+            System.out.println("\n[1] CREAR NUEVA RUTA");
+            System.out.println("[2] MODIFICAR RUTA");
+            System.out.println("[3] ELIMINAR RUTA");
+            System.out.println("[4] REGRESAR AL MENÚ PRINCIPAL");
 
-            System.out.println("\nSeleccione una opción");
+            System.out.println("\nSeleccione una opción:");
             opcion = sc.nextLine();
 
             switch (opcion) {
@@ -123,7 +124,7 @@ public class Menus {
 
                 case "2" -> {
                     System.out.println("Seleccione la ruta escribiendo su identificador:");
-                    Ruta ruta = controlador.getRutas().ElegirRutas();
+                    Ruta ruta = controlador.getRutas().elegirRutas();
                     if (ruta != null) {
                         System.out.println("Ruta encontrada!");
                         modificarRuta(ruta);
@@ -131,7 +132,7 @@ public class Menus {
                 }
                 case "3" -> {
                     System.out.println("Seleccione la ruta a eliminar escribiendo su identificador:");
-                    Ruta ruta = controlador.getRutas().ElegirRutas();
+                    Ruta ruta = controlador.getRutas().elegirRutas();
                     if (ruta != null) {
                         System.out.println("Ruta encontrada!");
                         controlador.getRutas().eliminarRuta(ruta);
@@ -150,20 +151,20 @@ public class Menus {
         String opcion;
 
         do {
-            System.out.println("\n[1] Agregar nueva parada al final");
-            System.out.println("[2] Insertar parada entre destinos");
-            System.out.println("[3] Cancelar parada");
-            System.out.println("[4] Simular recorrido");
-            System.out.println("[5] Regresar");
+            System.out.println("\n[1] AGREGAR NUEVA PARADA AL FINAL");
+            System.out.println("[2] REGISTRAR PARADA ENTRE DESTINOS");
+            System.out.println("[3] CANCELAR PARADA");
+            System.out.println("[4] SIMULAR RECORRIDO");
+            System.out.println("[5] REGRESAR");
 
             System.out.println("\nSeleccione una opción:");
             opcion = sc.nextLine();
 
             switch (opcion) {
-                case "1" -> ruta.agregarParadaFinal(); // Append
-                case "2" -> ruta.agregarEntreParadas();// Insert
-                case "3" -> ruta.eliminarParada(); // Delete node
-                case "4" -> ruta.simular(); // Navegación anterior/siguiente
+                case "1" -> ruta.agregarParadaFinal();
+                case "2" -> ruta.agregarEntreParadas();
+                case "3" -> ruta.eliminarParada();
+                case "4" -> ruta.simularRecorrido();
                 case "5" -> {
                     return;
                 }
@@ -175,28 +176,25 @@ public class Menus {
     public static void menuReporteGeneral() {
         Scanner sc = new Scanner(System.in);
         System.out.println("\n[ESTADO DE RECEPCIÓN]:");
-        System.out.println(">> Camiones en espera: ");
-        System.out.println(">> Próximo en turno: Placa \n"); // Placa o identificador supongo
+        System.out.println(">> CAMIONES EN ESPERA: ");
+        System.out.println(">> PRÓXIMO EN TURNO: PLACA \n");
         System.out.println("[ESTADO DE INVENTARIO]:");
-        //LOGICA PARA MOSTRAR LAS PILAS
 
+        // TODO: Imprimir inventario de cada pila del Patio
 
-
-        //Seleccionar trackeo de ruta para la logistica
-        System.out.println("Ecriba el identificador de la ruta que desea dar seguimiento");
-        Ruta ruta = controlador.getRutas().ElegirRutas();
+        System.out.println("Ecriba el identificador de la ruta que desea dar seguimiento:");
+        Ruta ruta = controlador.getRutas().elegirRutas();
         if (ruta != null) {
             System.out.println("Ruta encontrada!");
         } else {
             System.out.println("[ESTADO DE LOGÍSTICA]:");
-            System.out.println(">> Rutas activas: " + controlador.getRutas().getRutasActivas());
-            System.out.println(">> Proximo Destino: " +ruta.getParadas().getInicio());
-            System.out.println(">> Total de paradas programadas: " + ruta.getParadas().size());
+            System.out.println(">> RUTAS ACTIVAS: " + controlador.getRutas().getRutasActivas());
+            System.out.println(">> PRÓXIMO DESTINO: " +ruta.getParadas().getInicio());
+            System.out.println(">> TOTAL DE PARADAS PROGRAMADAS: " + ruta.getParadas().size());
 
             System.out.println("Presione Enter para volver al menú principal...");
-            sc.nextLine(); //Espera la entrada y se regresa
+            sc.nextLine();
         }
-
     }
 
     public static void submenuInspeccionarContenedor() {
@@ -206,14 +204,14 @@ public class Menus {
         controlador.seleccionarPila();
         controlador.retirarContenedor();
 
-        if (controlador.getPilaSeleccionada() != null) {
+        if (controlador.getPilaSeleccionada() != null && controlador.getContenedorSeleccionado() != null) {
             do {
-                System.out.println("\n[1] Agregar producto");
-                System.out.println("[2] Eliminar Producto");
-                System.out.println("[3] Buscar Producto");
-                System.out.println("[4] Calcular peso total");
-                System.out.println("[5] Mostrar Productos");
-                System.out.println("[6] Regresar");
+                System.out.println("\n[1] AGREGAR PRODUCTO");
+                System.out.println("[2] ELIMINAR PRODUCTO");
+                System.out.println("[3] BUSCAR PRODUCTO");
+                System.out.println("[4] CALCULAR PESO TOTAL");
+                System.out.println("[5] MOSTRAR PRODUCTOS");
+                System.out.println("[6] REGRESAR");
 
                 System.out.println("\nSeleccione una opción");
                 opcion = sc.nextLine();

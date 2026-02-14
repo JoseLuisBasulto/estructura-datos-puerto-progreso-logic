@@ -68,7 +68,7 @@ public class Ruta {
         }
     }
 
-    public void simular () {
+    public void simularRecorrido () {
         if(paradas.vacio()) {
             System.out.println("No hay nigúin destino trazado");
             return;
@@ -124,18 +124,15 @@ public class Ruta {
     public void AsignarContenedorARuta(Contenedor contenedor) {
         contenedoresAsignados.insertaFinal(contenedor);
         if(!activa) {
-
         } else {
             activa = true;
         }
-
     }
 
     @Override
     public String toString() {
         return idRuta;
     }
-
 
     public ListaDoble getParadas() {
         return paradas;
@@ -144,6 +141,7 @@ public class Ruta {
     public String getIdRuta() {
         return idRuta;
     }
+
     public ListaSimple getContenedoresAsignados() {
         return contenedoresAsignados;
     }

@@ -8,18 +8,18 @@ public class ListaRutas {
     public ListaRutas() {listaRutas = new ListaSimple();}
 
     // Bloque de clase Rutas
-    public Ruta ElegirRutas() {
+    public Ruta elegirRutas() {
         if(listaRutas.vacio()) {
-            System.out.println("No hay rutas registradas");
+            System.out.println("No hay rutas registradas.");
             return null;
         }
         Scanner sc = new Scanner(System.in);
         listaRutas.imprimir();
-        System.out.println("\nEscriba el nombre de su ruta");
+        System.out.println("\nEscriba el nombre de su ruta:");
         String idRuta = sc.nextLine();
         Ruta ruta = (Ruta)listaRutas.buscarElemento(idRuta);
         if(ruta == null){
-            System.out.println("\nLa ruta \"" + idRuta +"\" no existe");
+            System.out.println("\nLa ruta \"" + idRuta +"\" no existe.");
         }
         return ruta;
     }
@@ -30,11 +30,10 @@ public class ListaRutas {
     }
 
     public void eliminarRuta(Ruta ruta) {
-
         while(!ruta.getParadas().vacio()) {
             ruta.getParadas().eliminaInicio();
         }
-        System.out.println("Ruta Eliminada Con éxito");
+        System.out.println("Ruta eliminada con éxito!");
         listaRutas.eliminarEntreNodos(ruta);
     }
 
