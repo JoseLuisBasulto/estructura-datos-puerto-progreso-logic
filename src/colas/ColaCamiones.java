@@ -1,73 +1,54 @@
 package colas;
+import java.util.Scanner;
+
 import listas.Nodo;
+import modelo.Camion;
 
-public class ColaCamiones implements Queue {
-    private Nodo inicio;
-    private Nodo fin;
-    private int size;
+public class ColaCamiones extends Cola {
+    public ColaCamiones(){}
 
-    public ColaCamiones() {
-        inicio = null;
-        fin = null;
-        size = 0;
+    public void registrarLlegadaCamion() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Ingrese placa del camión: ");
+        String placa = sc.nextLine();
+
+        Camion camion = new Camion(placa);
+        enqueue(camion);
+        System.out.println("Camión registrado correctamente.");
     }
 
-    @Override
-    public void enqueue(Object dato) {
-        Nodo nuevo = new Nodo(dato);
-
+    public Camion darIngresoPatio() {
         if (isEmpty()) {
-            inicio = nuevo;
+            System.out.println("No hay camiones en espera");
+            return null;
+        }
+
+        Camion atendido = (Camion) dequeue();
+
+        if (atendido != null) {
+            System.out.println("Camión ingresando al patio: " + atendido);
+        }
+
+        return atendido;
+    }
+
+    public void verProximoCamion() {
+        Camion siguiente = (Camion) front();
+
+        if (siguiente != null) {
+            System.out.println("Próximo camión: " + siguiente);
         } else {
-            fin.setSiguiente(nuevo);
+            System.out.println("No hay camiones en espera.");
         }
-
-        fin = nuevo;
-        size++;
     }
 
     @Override
-    public Object dequeue() {
-        if (isEmpty()) {
-            System.out.println("\nNo hay camiones en espera");
-            return null;
-        }
-
-        Object dato = inicio.getDato();
-        inicio = inicio.getSiguiente();
-
-        if (inicio == null) {
-            fin = null;
-        }
-
-        size--;
-        return dato;
-    }
-
-    @Override
-    public Object front() {
-        if (isEmpty()) {
-            return null;
-        }
-        return inicio.getDato();
-    }
-
-    @Override
-    public int size() {
-        return size;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
     public void listar() {
-        Nodo actual = inicio;
         if (isEmpty()) {
-            System.out.println("\nNo hay camiones en espera.");
+            System.out.println("No hay camiones en espera.");
         } else {
-            System.out.println("\nCamiones en espera:");
+            System.out.println("Camiones en espera:");
+            Nodo actual = inicio;
             while (actual != null) {
                 System.out.println(actual.getDato());
                 actual = actual.getSiguiente();

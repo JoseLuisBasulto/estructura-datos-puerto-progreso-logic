@@ -1,9 +1,8 @@
 import java.util.Scanner;
-import colas.ColaCamiones;
-import pilas.PilaContenedores;
+
+import modelo.Camion;
 
 public class Menus {
-    private static ColaCamiones cola = new ColaCamiones();
     protected static Controlador controlador = new Controlador();
 
     public static void menuPrincipal() {
@@ -48,35 +47,11 @@ public class Menus {
             opcion = sc.nextLine();
 
             switch (opcion) {
-                case "1" -> {
-                    System.out.print("Ingrese placa del camión: ");
-                    String placa = sc.nextLine();
-
-                    Camion camion = new Camion(placa);
-                    cola.enqueue(camion);
-
-                    System.out.println("Camión registrado correctamente.");
-                } // Enqueue
-                case "2" -> {
-                    Camion atendido = (Camion) cola.dequeue();
-
-                    if (atendido != null) {
-                        System.out.println("Camión ingresando al patio: " + atendido);
-                    }
-                } // Dequeue
-                case "3" -> {
-                    Camion siguiente = (Camion) cola.front();
-
-                    if (siguiente != null) {
-                        System.out.println("Próximo camión: " + siguiente);
-                    } else {
-                        System.out.println("No hay camiones en espera.");
-                    }
-                } // Peek
-                case "4" -> cola.listar(); // Listar la cola
-                case "5" -> {
-                    return;
-                }
+                case "1" -> controlador.registrarLlegadaCamion(); // Enqueue
+                case "2" -> controlador.darIngresoPatio(); // Dequeue
+                case "3" -> controlador.verProximoCamion();// Peek
+                case "4" -> controlador.listarCamionesEnEspera(); // Listar la cola
+                case "5" -> {return;}
                 default -> System.out.println("Opción inválida.");
             }
         } while (true); // Bucle infinito que solo se sale con el return

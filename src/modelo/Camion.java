@@ -1,3 +1,5 @@
+package modelo;
+
 public class Camion {
     private String placa;
 

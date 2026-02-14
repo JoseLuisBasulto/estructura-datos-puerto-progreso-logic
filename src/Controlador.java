@@ -1,8 +1,7 @@
 import colas.ColaCamiones;
 import listas.ListaSimple;
+import modelo.Camion;
 import pilas.PilaContenedores;
-
-import java.util.Scanner;
 
 public class Controlador {
     private ColaCamiones colaRecepcion;
@@ -21,14 +20,20 @@ public class Controlador {
         contenedorSeleccionado = new Contenedor();
     }
 
-    //Bloque de ColaCamiones
-    public void registrarLlegadaCamion(Camion camion){
-        colaRecepcion.enqueue(camion);
-    }
+    //Modulo A (el mas dificil por eso JB se encarga :)
+    public void registrarLlegadaCamion(){colaRecepcion.registrarLlegadaCamion();}
 
     public void darIngresoPatio(){
-        //JB MOMENTO PARA DEQUEUE
+        Camion camion = colaRecepcion.darIngresoPatio();
+
+        if (camion != null){
+            //Aqui es donde va el codigo del papis we papis donde solo debemos llamar a su funcion que da ingreso a patio paro como se le acabo el agua a gemini todavia no lo ha hecho
+        }
     }
+
+    public void verProximoCamion(){colaRecepcion.verProximoCamion();}
+
+    public void listarCamionesEnEspera(){colaRecepcion.listar();}
 
     // Bloque de clase Patio
     public void agregarPila(){
