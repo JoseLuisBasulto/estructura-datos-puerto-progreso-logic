@@ -204,13 +204,24 @@ public class Menus {
         System.out.println(">> Próximo en turno: Placa \n"); // Placa o identificador supongo
         System.out.println("[ESTADO DE INVENTARIO]:");
         //LOGICA PARA MOSTRAR LAS PILAS
-        System.out.println("[ESTADO DE LOGÍSTICA]:");
-        System.out.println(">> Rutas activas: ");
-        System.out.println(">> Proximo Destino: "); // Espera valor
-        System.out.println(">> Total de paradas programadas: \n"); // Espera valor
 
-        System.out.println("Presione Enter para volver al menú principal...");
-        sc.nextLine(); //Espera la entrada y se regresa
+
+
+        //Seleccionar trackeo de ruta para la logistica
+        System.out.println("Ecriba el identificador de la ruta que desea dar seguimiento");
+        Ruta ruta = controlador.getRutas().ElegirRutas();
+        if (ruta != null) {
+            System.out.println("Ruta encontrada!");
+        } else {
+            System.out.println("[ESTADO DE LOGÍSTICA]:");
+            System.out.println(">> Rutas activas: " + controlador.getRutas().getRutasActivas());
+            System.out.println(">> Proximo Destino: " +ruta.getParadas().getInicio());
+            System.out.println(">> Total de paradas programadas: " + ruta.getParadas().size());
+
+            System.out.println("Presione Enter para volver al menú principal...");
+            sc.nextLine(); //Espera la entrada y se regresa
+        }
+
     }
 
     public static void submenuInspeccionarContenedor() {

@@ -16,6 +16,7 @@ public abstract class Lista {
        }
     }
 
+
     //Métodos abstractos de manipulación de lista
     public abstract void insertaInicio (Object dato);
     public abstract void insertaFinal (Object dato);

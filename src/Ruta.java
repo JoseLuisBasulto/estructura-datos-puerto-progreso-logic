@@ -1,4 +1,6 @@
+import listas.Lista;
 import listas.ListaDoble;
+import listas.ListaSimple;
 import listas.NodoDoble;
 
 import java.util.Scanner;
@@ -7,9 +9,12 @@ public class Ruta {
     Scanner sc = new Scanner(System.in);
     private ListaDoble paradas;
     private String idRuta;
+    private boolean activa = false;
+    private ListaSimple contenedoresAsignados;
 
     public Ruta(String idRuta){ //Crear ruta
         this.paradas = new ListaDoble();
+        this.contenedoresAsignados = new ListaSimple();
         this.idRuta = idRuta;
     }
 
@@ -116,6 +121,16 @@ public class Ruta {
         return true;
     }
 
+    public void AsignarContenedorARuta(Contenedor contenedor) {
+        contenedoresAsignados.insertaFinal(contenedor);
+        if(!activa) {
+
+        } else {
+            activa = true;
+        }
+
+    }
+
     @Override
     public String toString() {
         return idRuta;
@@ -128,5 +143,16 @@ public class Ruta {
 
     public String getIdRuta() {
         return idRuta;
+    }
+    public ListaSimple getContenedoresAsignados() {
+        return contenedoresAsignados;
+    }
+
+    public boolean esActiva() {
+        return activa;
+    }
+
+    public void setActiva(boolean activa) {
+        this.activa = activa;
     }
 }

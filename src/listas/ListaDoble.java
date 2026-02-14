@@ -1,7 +1,7 @@
 package listas;
 
 public class ListaDoble extends ListaD{
-
+    protected int size = 0;
     @Override
     public void insertaInicio(Object dato) {
         if(vacio()) {
@@ -10,6 +10,7 @@ public class ListaDoble extends ListaD{
             NodoDoble nuevo = new NodoDoble(dato, null, inicio);
             inicio.setAnterior(nuevo);
             inicio = nuevo;
+            size++;
         }
     }
 
@@ -21,6 +22,7 @@ public class ListaDoble extends ListaD{
             NodoDoble temp = new NodoDoble(dato, ultimo, null);
             ultimo.setSiguiente(temp);
             ultimo = temp;
+            size++;
         }
     }
 
@@ -31,9 +33,11 @@ public class ListaDoble extends ListaD{
             eliminado = inicio.getDato();
             if (inicio == ultimo) {
                 inicio = ultimo = null;
+                size--;
             } else {
                 inicio = inicio.getSiguiente();
                 inicio.setAnterior(null);
+                size--;
             }
         }
         return eliminado;
@@ -46,15 +50,17 @@ public class ListaDoble extends ListaD{
             eliminado = ultimo.getDato();
             if (inicio == ultimo) {
                 inicio = ultimo = null;
+                size--;
             } else {
                 ultimo = ultimo.getAnterior();
                 ultimo.setSiguiente(null);
+                size--;
             }
         }
         return  eliminado;
     }
 
-    //Encuentra la primer coincidencia y revisa al siguiente
+    //Encuentra la primer coincidencia y revisa al siguiente, este solo elimina ente medios
     public void insertaEntreNodos(Object a, Object b, Object dato) {
         if(!vacio()) {
             NodoDoble actual = inicio;
@@ -69,6 +75,7 @@ public class ListaDoble extends ListaD{
                 sigActual.setAnterior(nuevo);
                 nuevo.setAnterior(actual);
                 nuevo.setSiguiente(sigActual);
+                size++;
             } else {
                 System.out.println("No es posible");
             }
@@ -86,6 +93,7 @@ public class ListaDoble extends ListaD{
                 NodoDoble siguiente = actual.getSiguiente();
                 anterior.setSiguiente(siguiente);
                 siguiente.setAnterior(anterior);
+                size--;
             }
             return actual;
         }
@@ -102,4 +110,5 @@ public class ListaDoble extends ListaD{
         }
         return false;
     }
+    public int size() {return size;}
 }

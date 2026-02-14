@@ -4,11 +4,8 @@ import java.util.Scanner;
 
 public class ListaRutas {
     private ListaSimple listaRutas;
-    private ListaSimple contenedoresListos;
-    public ListaRutas() {
-        listaRutas = new ListaSimple();
-        contenedoresListos = new ListaSimple();
-    }
+    private int rutasActivas = 0;
+    public ListaRutas() {listaRutas = new ListaSimple();}
 
     // Bloque de clase Rutas
     public Ruta ElegirRutas() {
@@ -45,7 +42,11 @@ public class ListaRutas {
         return listaRutas;
     }
 
-    public ListaSimple getContenedoresListos() {
-        return contenedoresListos;
+    public void setRutasActivas(int rutasActivas) {
+        this.rutasActivas = rutasActivas;
+    }
+
+    public int getRutasActivas() {
+        return rutasActivas;
     }
 }

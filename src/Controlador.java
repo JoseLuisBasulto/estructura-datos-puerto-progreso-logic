@@ -8,7 +8,7 @@ public class Controlador {
     private ColaCamiones colaRecepcion;
     private PilaContenedores pilaSeleccionada;
     private Patio patio;
-    private  ListaRutas rutas;
+    private ListaRutas rutas;
     private Contenedor contenedorSeleccionado;
     protected ListaSimple almacen;
 
@@ -56,6 +56,15 @@ public class Controlador {
     public void topePilas() {
         patio.mostrarPilas();
     }
+    public void AsignarContenedorARuta(Contenedor contenedor, Ruta ruta) {
+        ruta.getContenedoresAsignados().insertaFinal(contenedor);
+        if(!ruta.esActiva()) {
+            rutas.setRutasActivas(rutas.getRutasActivas() + 1);
+        } else {
+            ruta.setActiva(true);
+        }
+    }
+
     // Bloque de clase Contenedor
     public void agregarProducto(){
         contenedorSeleccionado.agregarProducto();
