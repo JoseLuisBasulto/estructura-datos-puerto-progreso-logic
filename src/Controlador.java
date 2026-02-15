@@ -1,6 +1,3 @@
-import colas.ColaCamiones;
-import listas.ListaSimple;
-import modelo.Camion;
 import pilas.PilaContenedores;
 
 public class Controlador {
@@ -18,14 +15,18 @@ public class Controlador {
         pilaSeleccionada = new PilaContenedores();
         rutas = new ListaRutas();
         contenedorSeleccionado = new Contenedor();
+        rutaSeleccionada = new Ruta();
     }
 
+    // Bloque de clase Camión
     public void registrarLlegadaCamion(){colaRecepcion.registrarLlegadaCamion();}
 
     public void darIngresoPatio(){
         Camion camion = colaRecepcion.darIngresoPatio();
         if (camion != null){
-            // TODO: ??? Vincular esto con agregarContenedor de Patio
+            setContenedorSeleccionado(camion.getContenedor());
+        }else{
+            System.out.println("No se recibió un camión...");
         }
     }
 

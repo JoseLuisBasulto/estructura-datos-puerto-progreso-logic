@@ -1,9 +1,11 @@
 package colas;
 import listas.Nodo;
+
 public class Cola implements Queue{
     protected Nodo inicio;
     protected Nodo ultimo;
     protected int size;
+
     public Cola() {
         inicio = null;
         ultimo = null;
@@ -54,6 +56,7 @@ public class Cola implements Queue{
     public boolean isEmpty() {
         return size == 0;
     }
+
     public void listar() {
         Nodo actual = inicio;
         if (isEmpty()) {

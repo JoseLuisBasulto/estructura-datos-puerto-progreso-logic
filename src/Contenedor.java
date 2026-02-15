@@ -8,7 +8,13 @@ public class Contenedor {
     private String id;
     private ListaSimple productos;
 
+    public Contenedor(String id){
+        this.id = id;
+        productos = new ListaSimple();
+    }
+
     public Contenedor(){
+        id = null;
         productos = new ListaSimple();
     }
 
@@ -127,7 +133,7 @@ public class Contenedor {
 
     @Override
     public String toString() {
-        return getId();
+        return id;
     }
 
     // Setters y Getters

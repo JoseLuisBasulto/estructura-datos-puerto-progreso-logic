@@ -1,7 +1,5 @@
 import java.util.Scanner;
 
-import modelo.Camion;
-
 public class Menus {
     protected static Controlador controlador = new Controlador();
 
@@ -78,6 +76,7 @@ public class Menus {
                     controlador.seleccionarPila();
                     if (controlador.getPilaSeleccionada() != null) {
                         controlador.agregarContenedor();
+                        System.out.println("Contenedor agregado correctamente!");
                     }
                 }
                 case "2" -> {
@@ -189,7 +188,7 @@ public class Menus {
         } else {
             System.out.println("[ESTADO DE LOGÍSTICA]:");
             System.out.println(">> RUTAS ACTIVAS: " + controlador.getRutas().getRutasActivas());
-            System.out.println(">> PRÓXIMO DESTINO: " +ruta.getParadas().getInicio());
+            System.out.println(">> PRÓXIMO DESTINO: " + ruta.getParadas().getInicio());
             System.out.println(">> TOTAL DE PARADAS PROGRAMADAS: " + ruta.getParadas().size());
 
             System.out.println("Presione Enter para volver al menú principal...");

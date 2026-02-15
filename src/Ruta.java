@@ -6,11 +6,17 @@ import listas.NodoDoble;
 import java.util.Scanner;
 
 public class Ruta {
-    Scanner sc = new Scanner(System.in);
     private ListaDoble paradas;
     private String idRuta;
     private boolean activa = false;
     private ListaSimple contenedoresAsignados;
+
+    // Crear una ruta por default sin un identificador
+    public Ruta(){
+        this.paradas = new ListaDoble();
+        this.contenedoresAsignados = new ListaSimple();
+        this.idRuta = null;
+    }
 
     public Ruta(String idRuta){ //Crear ruta
         this.paradas = new ListaDoble();
@@ -19,6 +25,7 @@ public class Ruta {
     }
 
     public void agregarParadaFinal () {
+        Scanner sc = new Scanner(System.in);
         System.out.print("Ingrese el nombre de la nueva parada: ");
         String parada = sc.nextLine();
 
@@ -27,6 +34,7 @@ public class Ruta {
     }
 
     public void agregarEntreParadas () {
+        Scanner sc = new Scanner(System.in);
         if(paradas.vacio()) {
             System.out.println("No hay paradas registradas.");
         } else{
@@ -47,6 +55,7 @@ public class Ruta {
     }
 
     public void eliminarParada () {
+        Scanner sc = new Scanner(System.in);
         if(paradas.vacio()) {
             System.out.println("No hay paradas registradas para eliminar.");
             return;
@@ -69,6 +78,7 @@ public class Ruta {
     }
 
     public void simularRecorrido () {
+        Scanner sc = new Scanner(System.in);
         if(paradas.vacio()) {
             System.out.println("No hay nigúin destino trazado");
             return;
