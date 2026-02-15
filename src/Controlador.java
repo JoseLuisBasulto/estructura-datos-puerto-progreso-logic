@@ -21,8 +21,6 @@ public class Controlador {
         Camion camion = colaRecepcion.darIngresoPatio();
         if (camion != null){
             setContenedorSeleccionado(camion.getContenedor());
-        }else{
-            System.out.println("No se recibió un camión...");
         }
     }
 

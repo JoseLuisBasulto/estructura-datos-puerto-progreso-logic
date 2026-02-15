@@ -14,7 +14,7 @@ public class Contenedor {
     }
 
     //Método que no recibe parámetros, solo agrega al final un producto a la lista de productos
-    public void agregarProducto(){
+    public boolean agregarProducto(){
         Scanner sc = new Scanner(System.in);
         sc.useLocale(Locale.US);
 
@@ -31,9 +31,11 @@ public class Contenedor {
 
         if(validarContenedor(id,nombre) && peso != 0.0){
             productos.insertaFinal(new Producto(id,nombre,peso));
+            return true; // Para identificar que se creó y se agregó el producto
         }else{
             if(peso == 0.0){System.out.println("Peso invalido.");}
             System.out.println("\nNo se pudo crear el producto...");
+            return false; // Para identificar que no se creó ni se agregó el producto
         }
 
     }

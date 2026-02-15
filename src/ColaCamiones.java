@@ -54,8 +54,8 @@ public class ColaCamiones extends ColaSimple {
             }
         }
         for (int i = 0; i < cantidad; i++) {
-            System.out.println("\n Producto " + (i + 1) + " de " + cantidad);
-            contenedor.agregarProducto();
+            System.out.println("\nProducto " + (i + 1) + " de " + cantidad);
+            if(!contenedor.agregarProducto()){--i;} // Se regresa para poder volver a ingresar el producto correctamente
         }
         Camion camion = new Camion(placa, contenedor);
         enqueue(camion);
