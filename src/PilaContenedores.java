@@ -13,7 +13,7 @@ public class PilaContenedores extends PilaSimple {
     @Override
     public String toString() {
         return nombre;
-    }
+    } // Determina como se imprimirá esta clase
 
     // Agrega un contenedor a su inventario si la pila no está llena.
     public void agregarContenedor(Contenedor contenedor) {
@@ -48,7 +48,7 @@ public class PilaContenedores extends PilaSimple {
         return contenedorDeseado;
     }
 
-    public void visualizarPila() {
+    public void visualizarPila() { // Se imprime qué capacidad tiene la pila por medio de una ilustración y su peso total
         StringBuilder texto = new StringBuilder("[");
 
         for (int i = 0; i < LIMITE; i++) {
@@ -72,7 +72,7 @@ public class PilaContenedores extends PilaSimple {
         System.out.println(status);
     }
 
-    private double calcularPesoTotal() {
+    private double calcularPesoTotal() { // Suma el peso de todos los contenedores registrados en la pila
         double total = 0.0;
         Nodo actual = tope;
 

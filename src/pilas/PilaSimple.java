@@ -42,12 +42,12 @@ public class PilaSimple implements Stack {
     @Override
     public int size() { // Devuelve el tamaño actual de la pila
         return size;
-    }
+    } // Devuelve el tamaño de la pila
 
     @Override
     public boolean isEmpty() { // Si el tope es null, es que no hay ningún elemento en la pila
         return tope == null;
-    }
+    } // Si el tope es null, significa que la pila está vacía
 
     public void imprimirElementos() { // Imprime los objetos contenidos en la pila
         Nodo actual = tope;
