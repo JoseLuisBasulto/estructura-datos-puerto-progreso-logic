@@ -9,18 +9,54 @@ public class ColaCamiones extends ColaSimple {
 
     public void registrarLlegadaCamion() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("\nIngrese placa del camión: ");
-        String placa = sc.nextLine();
-        System.out.print("Ingrese id del contenedor: ");
-        String id = sc.nextLine();
-        Contenedor contenedor = new Contenedor(id);
+        String placa = "", id ="";
+        int cantidad = -1;
+        boolean placaValida = false, idValido = false, cantidadValida = false;
+        while(!placaValida){
+            System.out.print("\nIngrese placa del camión: ");
+            placa = sc.nextLine().trim();
+            if (placa.isEmpty()) {
+                System.out.println("Error: La placa no puede estar vacía.");
+            } else if (placa.length() < 3) {
+                System.out.println("Error: La placa debe tener al menos 3 caracteres.");
+            } else if (existePlaca(placa)) {
+                System.out.println("Error: Ya existe un camión con esa placa en la cola.");
+            } else {
+                placaValida = true;
+            }
 
-        System.out.println("\nCuántos productos existen en el contenedor?");
-        int cantidad = sc.nextInt();
-        for (int i = 0; i < cantidad; i++){
-            contenedor.agregarProducto();
+        }
+        while (!idValido) {
+            System.out.print("Ingrese id del contenedor: ");
+            id = sc.nextLine().trim();
+            if (id.isEmpty()) {
+                System.out.println("Error: El ID del contenedor no puede estar vacío.");
+            } else {
+                idValido = true;
+            }
         }
 
+        Contenedor contenedor = new Contenedor(id);
+
+        while (!cantidadValida) {
+            System.out.println("\n¿Cuántos productos existen en el contenedor?");
+            if (sc.hasNextInt()) {
+                cantidad = sc.nextInt();
+                sc.nextLine();
+                if (cantidad < 0) {
+                    System.out.println("Error: La cantidad no puede ser negativa.");
+                } else {
+                    cantidadValida = true;
+                }
+            } else {
+                System.out.println("Error: Debe ingresar un número válido.");
+                sc.nextLine();
+            }
+        }
+        for (int i = 0; i < cantidad; i++) {
+            System.out.println("\n Producto " + (i + 1) + " de " + cantidad);
+            contenedor.agregarProducto();
+        }
         Camion camion = new Camion(placa, contenedor);
         enqueue(camion);
         System.out.println("\nCamión registrado correctamente!");
@@ -63,5 +99,20 @@ public class ColaCamiones extends ColaSimple {
                 actual = actual.getSiguiente();
             }
         }
+    }
+    private boolean existePlaca(String placa) {
+        if (isEmpty()) {
+            return false;
+        }
+
+        Nodo actual = inicio;
+        while (actual != null) {
+            Camion camion = (Camion) actual.getDato();
+            if (camion != null && camion.getPlaca().equalsIgnoreCase(placa)) {
+                return true;
+            }
+            actual = actual.getSiguiente();
+        }
+        return false;
     }
 }
