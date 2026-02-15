@@ -187,9 +187,9 @@ public class Menus {
         System.out.println("\n[ESTADO DE RECEPCIÓN]:");
         System.out.println(">> CAMIONES EN ESPERA: ");
         System.out.println(">> PRÓXIMO EN TURNO: PLACA \n");
-        System.out.println("[ESTADO DE INVENTARIO]:");
 
-        // TODO: Imprimir inventario de cada pila del Patio
+        System.out.println("[ESTADO DE INVENTARIO]:");
+        controlador.visualizarPatio();
 
         System.out.println("Ecriba el identificador de la ruta que desea dar seguimiento:");
         Ruta ruta = controlador.getRutas().elegirRutas();

@@ -1,3 +1,4 @@
+import listas.Nodo;
 import pilas.PilaSimple;
 
 public class PilaContenedores extends PilaSimple {
@@ -45,6 +46,43 @@ public class PilaContenedores extends PilaSimple {
         }
 
         return contenedorDeseado;
+    }
+
+    public void visualizarPila() {
+        StringBuilder texto = new StringBuilder("[");
+
+        for (int i = 0; i < LIMITE; i++) {
+            if (i < size) {
+                texto.append("|");
+            } else {
+                texto.append(" ");
+            }
+        }
+        texto.append("]");
+
+        double pesoPila = calcularPesoTotal();
+
+        String status = String.format(">> Pila %s: %s (%d/%d) - Peso Total: %,.0f kg",
+                nombre, texto, size, LIMITE, pesoPila);
+
+        if (size == LIMITE) {
+            status += " - ¡CRÍTICO: LLENA!";
+        }
+
+        System.out.println(status);
+    }
+
+    private double calcularPesoTotal() {
+        double total = 0.0;
+        Nodo actual = tope;
+
+        while (actual != null) {
+            Contenedor contenedorActual = (Contenedor) actual.getDato();
+            total += contenedorActual.calcularPeso();
+            actual = actual.getSiguiente();
+        }
+
+        return total;
     }
 
     // La pila ha llegado a su límite de contenedores? False si es menor que 5, True de otro modo

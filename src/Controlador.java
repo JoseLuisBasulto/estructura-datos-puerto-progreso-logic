@@ -61,6 +61,8 @@ public class Controlador {
         }
     }
 
+    public void visualizarPatio() {patio.mostrarPatio();}
+
     // Bloque de clase Contenedor
     public void agregarProducto(){contenedorSeleccionado.agregarProducto();}
 

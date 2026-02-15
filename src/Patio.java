@@ -105,6 +105,20 @@ public class Patio {
         return retirado;
     }
 
+    public void mostrarPatio() {
+        if (almacen.vacio()) {
+            System.out.println("\nNo hay pilas registradas en el patio.");
+        }  else {
+            Nodo actual = almacen.getInicio();
+            while (actual != null){
+                Object temp = actual.getDato();
+                PilaContenedores pilaActual = (PilaContenedores) temp;
+                pilaActual.visualizarPila();
+                actual = actual.getSiguiente();
+            }
+        }
+    }
+
     public void mostrarPilas() { // Impresión de pilas registradas en el patio
         if (almacen.vacio()) {
             System.out.println("\nNo hay pilas registradas en el patio.");
