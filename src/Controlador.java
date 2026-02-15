@@ -61,6 +61,8 @@ public class Controlador {
         }
     }
 
+    public void mostrarReporteRecepcion() {colaRecepcion.mostrarReporteRecepcion();}
+
     public void visualizarPatio() {patio.mostrarPatio();}
 
     // Bloque de clase Contenedor
@@ -95,4 +97,8 @@ public class Controlador {
     public void setPilaSeleccionada(PilaContenedores pilaSeleccionada) {
         this.pilaSeleccionada = pilaSeleccionada;
     }
+
+
+
+
 }

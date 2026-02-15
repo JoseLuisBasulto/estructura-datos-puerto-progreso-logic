@@ -185,9 +185,7 @@ public class Menus {
     public static void menuReporteGeneral() {
         Scanner sc = new Scanner(System.in);
         System.out.println("\n[ESTADO DE RECEPCIÓN]:");
-        System.out.println(">> CAMIONES EN ESPERA: ");
-        System.out.println(">> PRÓXIMO EN TURNO: PLACA \n");
-
+        controlador.mostrarReporteRecepcion();
         System.out.println("[ESTADO DE INVENTARIO]:");
         controlador.visualizarPatio();
 

@@ -115,4 +115,14 @@ public class ColaCamiones extends ColaSimple {
         }
         return false;
     }
+    public void mostrarReporteRecepcion() {
+        System.out.println(">> CAMIONES EN ESPERA: " + size());
+
+        Camion proximoCamion = (Camion) front();
+        if (proximoCamion != null) {
+            System.out.println(">> PRÓXIMO EN TURNO: PLACA " + proximoCamion.getPlaca() + "\n");
+        } else {
+            System.out.println(">> PRÓXIMO EN TURNO: No hay camiones en espera\n");
+        }
+    }
 }
