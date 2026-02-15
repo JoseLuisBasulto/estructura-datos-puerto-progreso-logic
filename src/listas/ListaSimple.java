@@ -67,7 +67,7 @@ public class ListaSimple extends Lista {
         Nodo actual = inicio;
 
         while (actual != null) {
-            if (actual.getDato().toString().equals(dato)) { // Por el toString de Ruta
+            if (actual.getDato().toString().equals(dato)) { // Porque ListasRutas compara Ruta con Strings
                 return actual.dato;
             }
             actual = actual.siguiente;

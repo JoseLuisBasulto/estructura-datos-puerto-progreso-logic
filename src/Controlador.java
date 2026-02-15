@@ -51,6 +51,11 @@ public class Controlador {
 
     public void topePilas() {patio.mostrarPilas();}
 
+    /*
+    -Recibe una instancia de Contenedor y Ruta para relacionarlos
+    -No retorna
+    -Método que asigna un contenedor a una Ruta existente
+      */
     public void asignarRuta(Contenedor contenedor, Ruta ruta) {
         ruta.getContenedoresAsignados().insertaFinal(contenedor);
         if(!ruta.esActiva()) {

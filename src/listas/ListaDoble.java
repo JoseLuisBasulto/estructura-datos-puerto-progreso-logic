@@ -2,6 +2,12 @@ package listas;
 
 public class ListaDoble extends ListaD{
     protected int size = 0;
+
+    /*
+    -Recibe un dato tipo Object
+    -No retorna
+    -Inserta un NodoDoble asociado con el dato  del párametro al inicio de la ListaDoble
+     */
     @Override
     public void insertaInicio(Object dato) {
         if(vacio()) {
@@ -10,10 +16,15 @@ public class ListaDoble extends ListaD{
             NodoDoble nuevo = new NodoDoble(dato, null, inicio);
             inicio.setAnterior(nuevo);
             inicio = nuevo;
-            size++;
         }
+        size++;
     }
 
+    /*
+    -Recibe un dato tipo Object
+    -No retorna
+    -Inserta un NodoDoble asociado con el dato  del párametro al final de la ListaDoble
+     */
     @Override
     public void insertaFinal(Object dato) {
         if(vacio()) {
@@ -26,6 +37,11 @@ public class ListaDoble extends ListaD{
         size++;
     }
 
+    /*
+    -Sin parametros
+    -Retorna un Objeto
+    -Elimina el primer NodoDoble de la ListaDoble y retorna su dato asociado
+     */
     @Override
     public Object eliminaInicio() {
         Object eliminado = null;
@@ -42,6 +58,11 @@ public class ListaDoble extends ListaD{
         return eliminado;
     }
 
+    /*
+    -Sin parametros
+    -Retorna un Objeto
+    -Elimina el ultimo NodoDoble de la ListaDoble y retorna su dato asociado
+     */
     @Override
     public Object eliminaFinal() {
         Object eliminado = null;
@@ -58,7 +79,12 @@ public class ListaDoble extends ListaD{
         return  eliminado;
     }
 
-    //Encuentra la primer coincidencia y revisa al siguiente, este solo elimina ente medios
+    /*
+    -Recibe dos Objets a y b (no importa su orden) y un Object dato (el que se insertará entre a y b)
+    -No retorna
+    -Encuentra la primer coincidencia con los datos de los NodosDobles de ListaDoble (sea a o b) y revisa si el siguiente dato del NodoDoble dato es a o b (dependiendo de cual encontró primero)
+     Solo inserta entre nodos
+     */
     public void insertaEntreNodos(Object a, Object b, Object dato) {
         if(!vacio()) {
             NodoDoble actual = inicio;
@@ -79,6 +105,13 @@ public class ListaDoble extends ListaD{
             }
         }
     }
+
+    /*
+    -Recibe dos Objets a y b (no importa su orden) y un Object dato (el que se insertará entre a y b)
+    -No retorna
+    -Encuentra la primer coincidencia con los datos de los NodosDobles de ListaDoble (sea a o b) y revisa si el siguiente dato del NodoDoble dato es a o b (dependiendo de cual encontró primero)
+     Solo elimina entre nodos
+     */
     @Override
     public Object eliminarEntreNodos(Object a) {
         if(!vacio()) {
@@ -98,6 +131,12 @@ public class ListaDoble extends ListaD{
         return null;
     }
 
+    /*
+    -Recibe un Object dato para comparar con los datos de los NodosDobles de ListaDoble
+    -Retorna verdadero si ya existe el dato, falso de lo contrario
+    -Encuentra la primera coindicencia de los datos de los NodosDobles de ListaDoble,
+     para que no hayas NodosDobles con datos iguales, para que no haya paradas con el mismo nombre
+     */
     public boolean existeNodo(Object dato) {
         if(!vacio()) {
             NodoDoble actual = inicio;
@@ -108,5 +147,7 @@ public class ListaDoble extends ListaD{
         }
         return false;
     }
+
+    //Getters
     public int size() {return size;}
 }

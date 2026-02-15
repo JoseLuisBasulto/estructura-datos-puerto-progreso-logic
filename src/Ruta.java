@@ -1,4 +1,3 @@
-import listas.Lista;
 import listas.ListaDoble;
 import listas.ListaSimple;
 import listas.NodoDoble;
@@ -8,15 +7,26 @@ import java.util.Scanner;
 public class Ruta {
     private ListaDoble paradas;
     private String idRuta;
-    private boolean activa = false;
+    private boolean activa;
     private ListaSimple contenedoresAsignados;
 
+    /*
+    -Recibe un String, el identificador de la ruta
+    -Es un constructor
+    -Constructor para crear una ruta con su identificador, su ListaDoble de paradas, e indicar que no esta activa
+     */
     public Ruta(String idRuta){ //Crear ruta
         this.paradas = new ListaDoble();
         this.contenedoresAsignados = new ListaSimple();
         this.idRuta = idRuta;
+        this.activa = false;
     }
 
+    /*
+    -Sin parametros
+    -No retorna
+    -Agrega una parada (String) al final de la ListaDoble de paradas
+     */
     public void agregarParadaFinal () {
         Scanner sc = new Scanner(System.in);
         System.out.print("Ingrese el nombre de la nueva parada: ");
@@ -26,6 +36,11 @@ public class Ruta {
             paradas.insertaFinal(parada);}
     }
 
+    /*
+    -Sin parametros
+    -No retorna
+    -Agrega una parada (String) entre otras dos paradas que ya existen en la ListaDoble de paradas
+     */
     public void agregarEntreParadas () {
         Scanner sc = new Scanner(System.in);
         if(paradas.vacio()) {
@@ -46,7 +61,11 @@ public class Ruta {
         }
 
     }
-
+    /*
+    -Sin parametros
+    -No retorna
+    -Elimina una parada (String) que existe en la ListaDoble de paradas
+     */
     public void eliminarParada () {
         Scanner sc = new Scanner(System.in);
         if(paradas.vacio()) {
@@ -69,7 +88,11 @@ public class Ruta {
             }
         }
     }
-
+    /*
+    -Sin parametros
+    -No retorna
+    -Permite "iterar" la ListaDoble de paradas mostrando los datos de los NodosDobles de esta. Permite ir hacia adelante y hacia atrás, siempre iniciando en el primer NodoDoble
+     */
     public void simularRecorrido () {
         Scanner sc = new Scanner(System.in);
         if(paradas.vacio()) {
@@ -117,26 +140,32 @@ public class Ruta {
         } while (!op.equals("3"));
 
     }
-
-    public boolean valido (String nombre) {
-        if(nombre.isEmpty()){System.out.println("Nombre no válido");return false;}
-        else if (paradas.existeNodo(nombre)) {System.out.println("El nombre de la parada ya existe");return false;}
+    /*
+    -Recibe un String, el nombre de la Parada designada por el usuario
+    -Retorna true si el nombre es valido, false de lo contrario
+    -Verifica si el nombre de la parada dada por el usuario es válida para el sistema
+     */
+    public boolean valido (String nombreParada) {
+        if (nombreParada.isEmpty()) {
+            System.out.println("Nombre no válido");
+            return false;
+        } else if (paradas.existeNodo(nombreParada)) {
+            System.out.println("El nombre de la parada ya existe");
+            return false;
+        }
         return true;
     }
-
-    public void AsignarContenedorARuta(Contenedor contenedor) {
-        contenedoresAsignados.insertaFinal(contenedor);
-        if(!activa) {
-        } else {
-            activa = true;
-        }
-    }
-
+    /*
+    -Sin parametros
+    -Retorna un String
+    -Para darle una representación textual a la instancia Ruta, por su identificador (String) propio.
+     */
     @Override
     public String toString() {
         return idRuta;
     }
 
+    //Getters y Setters
     public ListaDoble getParadas() {
         return paradas;
     }

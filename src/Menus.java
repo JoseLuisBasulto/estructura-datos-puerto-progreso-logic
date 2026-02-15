@@ -22,7 +22,7 @@ public class Menus {
             switch (opcion) {
                 case "1" -> menuZonaRecepcion();
                 case "2" -> menuPatioContenedores();
-                case "3" -> menuDistribucion();
+                case "3" -> menuDeRutas();
                 case "4" -> menuReporteGeneral();
                 case "5" -> System.out.println("Saliendo...");
                 default -> System.out.println("Opción inválida.");
@@ -105,8 +105,12 @@ public class Menus {
             }
         } while (true);
     }
-
-    public static void menuDistribucion() {
+    /*
+    -Sin parametros
+    -No retorna
+    -Menú interactivo que ofrece métodos para crear/modificar/eliminar rutas
+     */
+    public static void menuDeRutas() {
         Scanner sc = new Scanner(System.in);
         String opcion;
 
@@ -123,6 +127,7 @@ public class Menus {
                 case "1" -> {
                     System.out.println("Asigne un identificador a su ruta:");
                     String idRuta = sc.nextLine();
+                    if(idRuta.isEmpty()) {System.out.println("Identificador inválido");break;}
                     if (controlador.getRutas().getListaRutas().buscarElemento(idRuta) == null) {
                         System.out.println("Ruta creada exitosamente!");
                         controlador.getRutas().crearRuta(idRuta);
@@ -154,7 +159,11 @@ public class Menus {
             }
         } while (true);
     }
-
+    /*
+    -Recine una instancia de Ruta
+    -No retorna
+    -Menú interactivo que ofrece métodos para modificar una ruta elegida por el usuario
+     */
     public static void modificarRuta(Ruta ruta) {
         Scanner sc = new Scanner(System.in);
         String opcion;
