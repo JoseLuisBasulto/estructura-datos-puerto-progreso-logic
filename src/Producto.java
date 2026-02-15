@@ -3,11 +3,6 @@ public class Producto {
     private String nombre;
     private double peso;
 
-    //No arg-constructor
-    public Producto(){
-        this("NO ID", "NO NOMBRE", 0.0);
-    }
-
     public Producto(String id, String nombre, double peso){
         this.id = id;
         this.nombre = nombre;

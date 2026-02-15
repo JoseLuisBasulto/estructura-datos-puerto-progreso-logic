@@ -1,7 +1,7 @@
 import listas.ListaSimple;
 import listas.Nodo;
 
-import java.util.Locale; //En caso de no tener el teclado en inglés ✅
+import java.util.Locale; //En caso de no tener el teclado en inglés
 import java.util.Scanner;
 
 public class Contenedor {
@@ -10,11 +10,6 @@ public class Contenedor {
 
     public Contenedor(String id){
         this.id = id;
-        productos = new ListaSimple();
-    }
-
-    public Contenedor(){
-        id = null;
         productos = new ListaSimple();
     }
 
@@ -28,14 +23,19 @@ public class Contenedor {
         System.out.println("Ingrese nombre: ");
         String nombre = sc.nextLine();
         System.out.println("Ingrese peso en kg: ");
-        double peso = sc.nextDouble();
 
-        // Se verifica que no haya un contenedor con el id ingresado, para evitar duplicados
-        if(productos.buscarElemento(id) == null){
+        double peso = 0.0; // Significa que el producto no tiene peso, lo cual es imposible
+        if(sc.hasNextDouble()){ // Verifica que el dato de entrada sea un double, no permite dejar en blanco
+            peso = sc.nextDouble();
+        }
+
+        if(validarContenedor(id,nombre) && peso != 0.0){
             productos.insertaFinal(new Producto(id,nombre,peso));
         }else{
-            System.out.println("\nIdentificador ocupado, volver a intentar...");
+            if(peso == 0.0){System.out.println("Peso invalido.");}
+            System.out.println("\nNo se pudo crear el producto...");
         }
+
     }
 
     // Método que no recibe parámetros, devuelve un valor double que es el peso del contenedor
@@ -136,17 +136,24 @@ public class Contenedor {
         }
     }
 
+    public boolean validarContenedor(String id, String nombre){
+        boolean valido = true;
+
+        System.out.println(" "); //Para tener un espacio con el texto anterior y no entre los mensajes de error
+        if(productos.buscarElemento(id) != null){ // Busca si el id se encuentra en la lista de productos
+            System.out.println("El id ya está ocupado.");
+            valido = false;
+        }
+        if(id.isEmpty() || nombre.isEmpty()){ // En caso que no se haya ingresado un identificador o un nombre
+            System.out.println("Campo id o nombre está vacio.");
+            valido = false;
+        }
+
+        return valido;
+    }
+
     @Override
     public String toString() {
         return id;
-    }
-
-    // Setters y Getters
-    public String getId() {
-        return id;
-    }
-
-    public void setProductos(ListaSimple productos) {
-        this.productos = productos;
     }
 }
