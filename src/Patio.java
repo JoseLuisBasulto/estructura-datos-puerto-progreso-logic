@@ -1,6 +1,5 @@
 import listas.ListaSimple;
 import listas.Nodo;
-import pilas.PilaContenedores;
 
 import java.util.Scanner;
 
@@ -9,8 +8,7 @@ public class Patio {
 
     public Patio() { almacen = new ListaSimple();}
 
-    // Se agrega una nueva columna al almacén por medio de una inserción de una nueva pila a la lista de pilas
-    // La función no recibe argumentos ni devuelve la referencia de algún objeto
+    // Se registra una nueva pila de contenedores al patio.
     public void agregarPila() {
         Scanner sc = new Scanner(System.in);
 
@@ -27,7 +25,7 @@ public class Patio {
         }
     }
 
-    // Elimina una pila vacía de la lista de pilas. La función no recibe ni devuelve ningún argumento.
+    // Elimina una pila vacía de la lista de pilas.
     public void eliminarPila() {
         Scanner sc = new Scanner(System.in);
 
@@ -54,8 +52,7 @@ public class Patio {
         }
     }
 
-    // Para facilitar la modificación de una columna, esta función le permite al usuario escoger una pila en específico
-    // La función no recibe ningún parámetro, pero devuelve la referencia de la pila elegida por el usuario
+    // Selecciona una pila en específico del almacén para hacer modificaciones en ella, si esta existe.
     public PilaContenedores seleccionarPila() {
         Scanner sc = new Scanner(System.in);
 
@@ -80,61 +77,37 @@ public class Patio {
         }
     }
 
-    // Se agrega un contenedor a la pila seleccionada anteriormente, este contenedor ya debió pasar por recepción (módulo A)
-    // La función recibe el contenedor elegido y la pila específica que se está modificando. No devuelve nada la función
-    public void agregarContenedor(PilaContenedores pilaActual, Contenedor contenedor) {
-        if (almacen.vacio()) {
-            System.out.println("\nNo hay pilas registradas.");
-        } else if (!validarPila(pilaActual)) {
-            System.out.println("\nEsta pila de contenedores llegó a su límite. Registra una nueva pila.");
-        } else { // TODO
-            pilaActual.push(contenedor);
+    // Se agrega el contenedor seleccionado a la pila especificada anteriormente
+    public void gestionarIngreso(Contenedor contenedor, PilaContenedores pilaSeleccionada) {
+        if (pilaSeleccionada != null) {
+            pilaSeleccionada.agregarContenedor(contenedor);
         }
     }
 
-    //  Retira del almacén un contenedor particular y le asigna una parada dentro de una ruta existente
-    // La función recibe la pila que se seleccionó anteriormente y no devuelve el contenedor que se quiere sacar
-    public Contenedor retirarContenedor(PilaContenedores pilaActual) {
+    // Se extrae el contenedor seleccionado a la pila especificada anteriormente
+    public Contenedor gestionarRetiro(PilaContenedores pilaSeleccionada) {
+        if (pilaSeleccionada == null || pilaSeleccionada.isEmpty()) {
+            System.out.println("Operación cancelada.");
+            return null;
+        }
+
         Scanner sc = new Scanner(System.in);
-        Contenedor contenedorDeseado = null;
+        System.out.println("Ingrese el nombre del contenedor a retirar:");
+        String cadenaUsuario = sc.nextLine();
 
-        if (pilaActual.isEmpty()) {
-            System.out.println("\nNo hay contenedores disponibles para retirar en esta pila.");
+        Contenedor retirado = pilaSeleccionada.extraerContenedor(cadenaUsuario);
+
+        if (retirado != null) {
+            System.out.println("El contenedor " + retirado + " se ha retirado del patio.");
         } else {
-            PilaContenedores pilaAuxiliar = new PilaContenedores();
-
-            System.out.println("\nContenedores disponibles:");
-            pilaActual.mostrarContenedores();
-            System.out.println("\nEscribe el contenedor que quieres retirar.");
-
-            String cadenaUsuario = sc.nextLine();
-
-            while (!pilaActual.isEmpty() && !pilaActual.top().toString().equals(cadenaUsuario)) {
-                Nodo nodo = (Nodo) pilaActual.pop(); // pop devuelve nodo así que se guarda
-                Contenedor contenedor = (Contenedor) nodo.getDato(); // Se castea el dato del nodo a tipo Contenedor
-                pilaAuxiliar.push(contenedor);
-            }
-
-            if (!pilaActual.isEmpty() && pilaActual.top().toString().equals(cadenaUsuario)) {
-                Nodo nodo = (Nodo) pilaActual.pop(); // EL pop devuelve un nodo así que se guarda
-                contenedorDeseado = (Contenedor) nodo.getDato(); // Ahora podemos castear el dato de tipo Object del Nodo a Contenedor
-                System.out.println("\nEl contenedor " + contenedorDeseado + " fue extraído exitosamente!");
-            } else {
-                System.out.println("\nEl contenedor " + cadenaUsuario + " no se encuentra en esta pila de contenedores.");
-            }
-
-            while (!pilaAuxiliar.isEmpty()) {
-                Nodo nodo = (Nodo) pilaAuxiliar.pop();
-                Contenedor contenedor = (Contenedor) nodo.getDato();
-                pilaActual.push(contenedor);
-            }
+            System.out.println("No se encontró ese nombre en la pila " + pilaSeleccionada);
         }
-        return contenedorDeseado;
+        return retirado;
     }
 
-    public void mostrarPilas() {
+    public void mostrarPilas() { // Impresión de pilas registradas en el patio
         if (almacen.vacio()) {
-            System.out.println("\nNo hay pilas registradas en el Patio..");
+            System.out.println("\nNo hay pilas registradas en el patio.");
         }  else {
             System.out.println("\n=== Tope de las Pilas ===");
             Nodo actual = almacen.getInicio();
@@ -142,7 +115,7 @@ public class Patio {
                 Object temp = actual.getDato();
                 PilaContenedores pilaActual = (PilaContenedores) temp;
                 if (pilaActual.top() == null) {
-                    System.out.println("Nombre: " + pilaActual + ", Tope: Sin tope");
+                    System.out.println("Nombre: " + pilaActual + ", Tope: Ninguno");
                 } else {
                     System.out.println("Nombre: " + pilaActual + ", Tope: " + pilaActual.top());
                 }
@@ -150,13 +123,4 @@ public class Patio {
             }
         }
     }
-
-    // Función que valida si la pila seleccionada (entrada) ya ha llegado a su límite y hay que crear otra (5 contenedores)
-    public boolean validarPila(PilaContenedores pilaActual) {
-        if (pilaActual.size() > 4) {
-            return false;
-        }
-        return true;
-    }
-
 }

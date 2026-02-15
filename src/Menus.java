@@ -210,9 +210,11 @@ public class Menus {
         String opcion;
 
         controlador.seleccionarPila();
-        controlador.retirarContenedor();
+        if (controlador.getPilaSeleccionada() != null) {
+            controlador.retirarContenedor();
+        }
 
-        if (controlador.getPilaSeleccionada() != null && controlador.getContenedorSeleccionado() != null) {
+        if (controlador.getContenedorSeleccionado() != null) {
             do {
                 System.out.println("\n[1] AGREGAR PRODUCTO");
                 System.out.println("[2] ELIMINAR PRODUCTO");

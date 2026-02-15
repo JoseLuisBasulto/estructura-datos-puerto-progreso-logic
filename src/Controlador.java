@@ -1,5 +1,3 @@
-import pilas.PilaContenedores;
-
 public class Controlador {
     private ColaCamiones colaRecepcion;
     private PilaContenedores pilaSeleccionada;
@@ -40,18 +38,18 @@ public class Controlador {
     public void eliminarPila() { patio.eliminarPila();}
 
     public void seleccionarPila(){
-        setPilaSeleccionada(patio.seleccionarPila());
+        setPilaSeleccionada( patio.seleccionarPila());
     }
 
     public void retirarContenedor(){
         if (pilaSeleccionada == null) {
             System.out.println("No es posible realizar esta acción.");
         } else {
-            setContenedorSeleccionado(patio.retirarContenedor(pilaSeleccionada));
+            setContenedorSeleccionado(patio.gestionarRetiro(pilaSeleccionada));
         }
     }
 
-    public void agregarContenedor(){patio.agregarContenedor(pilaSeleccionada, contenedorSeleccionado);}
+    public void agregarContenedor(){patio.gestionarIngreso(contenedorSeleccionado, pilaSeleccionada);}
 
     public void topePilas() {patio.mostrarPilas();}
 
@@ -75,14 +73,6 @@ public class Controlador {
     public void mostrarProductos(){contenedorSeleccionado.mostrarProductos();}
 
     // Getters
-    public ColaCamiones getColaRecepcion() {
-        return colaRecepcion;
-    }
-
-    public Patio getPatio() {
-        return patio;
-    }
-
     public ListaRutas getRutas() {
         return rutas;
     }
@@ -95,7 +85,6 @@ public class Controlador {
         return pilaSeleccionada;
     }
 
-
     // Setters
     public void setContenedorSeleccionado(Contenedor contenedorSeleccionado) {
         this.contenedorSeleccionado = contenedorSeleccionado;
@@ -104,5 +93,4 @@ public class Controlador {
     public void setPilaSeleccionada(PilaContenedores pilaSeleccionada) {
         this.pilaSeleccionada = pilaSeleccionada;
     }
-
 }

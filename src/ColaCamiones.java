@@ -1,9 +1,9 @@
 import java.util.Scanner;
 
-import colas.Cola;
+import colas.ColaSimple;
 import listas.Nodo;
 
-public class ColaCamiones extends Cola {
+public class ColaCamiones extends ColaSimple {
 
     public ColaCamiones(){}
 
@@ -15,7 +15,7 @@ public class ColaCamiones extends Cola {
         String id = sc.nextLine();
         Contenedor contenedor = new Contenedor(id);
 
-        System.out.println("\nCuántos productos desea ingresar al contenedor?");
+        System.out.println("\nCuántos productos existen en el contenedor?");
         int cantidad = sc.nextInt();
         for (int i = 0; i < cantidad; i++){
             contenedor.agregarProducto();

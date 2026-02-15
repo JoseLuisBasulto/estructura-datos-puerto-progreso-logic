@@ -1,12 +1,12 @@
 package colas;
 import listas.Nodo;
 
-public class Cola implements Queue{
+public class ColaSimple implements Queue {
     protected Nodo inicio;
     protected Nodo ultimo;
     protected int size;
 
-    public Cola() {
+    public ColaSimple() {
         inicio = null;
         ultimo = null;
         size = 0;
