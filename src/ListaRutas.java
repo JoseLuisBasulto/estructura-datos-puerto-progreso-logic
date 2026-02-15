@@ -14,6 +14,7 @@ public class ListaRutas {
             return null;
         }
         Scanner sc = new Scanner(System.in);
+        System.out.println("Rutas creadas:");
         listaRutas.imprimir();
         System.out.println("\nEscriba el nombre de su ruta:");
         String idRuta = sc.nextLine();
@@ -30,6 +31,7 @@ public class ListaRutas {
     }
 
     public void eliminarRuta(Ruta ruta) {
+        if(ruta.esActiva()) {rutasActivas--;}
         while(!ruta.getParadas().vacio()) {
             ruta.getParadas().eliminaInicio();
         }

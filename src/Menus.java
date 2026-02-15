@@ -85,10 +85,15 @@ public class Menus {
                     }
                 }
                 case "2" -> {
-                    controlador.seleccionarPila();
-                    if (controlador.getPilaSeleccionada() != null) {
-                        controlador.retirarContenedor();
-                        controlador.asignarRuta(controlador.getContenedorSeleccionado(), controlador.getRutaSeleccionada());
+                    if(!controlador.getRutas().getListaRutas().vacio()) {
+                        controlador.seleccionarPila();
+                        if (controlador.getPilaSeleccionada() != null) {
+                            controlador.retirarContenedor();
+                            if(controlador.getContenedorSeleccionado() == null){return;}
+                            controlador.asignarRuta(controlador.getContenedorSeleccionado(), controlador.getRutas().elegirRutas());
+                        }
+                    } else {
+                        System.out.println("No hay rutas trazadas");
                     }
                 }
                 case "3" -> controlador.topePilas();
@@ -190,10 +195,9 @@ public class Menus {
         Ruta ruta = controlador.getRutas().elegirRutas();
         if (ruta != null) {
             System.out.println("Ruta encontrada!");
-        } else {
             System.out.println("[ESTADO DE LOGÍSTICA]:");
             System.out.println(">> RUTAS ACTIVAS: " + controlador.getRutas().getRutasActivas());
-            System.out.println(">> PRÓXIMO DESTINO: " + ruta.getParadas().getInicio());
+            System.out.println(">> PRÓXIMO DESTINO: " + ((!ruta.getParadas().vacio()) ? ruta.getParadas().getInicio().getDato() : "No hay destino registrado"));
             System.out.println(">> TOTAL DE PARADAS PROGRAMADAS: " + ruta.getParadas().size());
 
             System.out.println("Presione Enter para volver al menú principal...");

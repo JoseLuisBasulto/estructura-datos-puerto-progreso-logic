@@ -22,8 +22,8 @@ public class ListaDoble extends ListaD{
             NodoDoble temp = new NodoDoble(dato, ultimo, null);
             ultimo.setSiguiente(temp);
             ultimo = temp;
-            size++;
         }
+        size++;
     }
 
     @Override
@@ -33,13 +33,12 @@ public class ListaDoble extends ListaD{
             eliminado = inicio.getDato();
             if (inicio == ultimo) {
                 inicio = ultimo = null;
-                size--;
             } else {
                 inicio = inicio.getSiguiente();
                 inicio.setAnterior(null);
-                size--;
             }
         }
+        size--;
         return eliminado;
     }
 
@@ -50,13 +49,12 @@ public class ListaDoble extends ListaD{
             eliminado = ultimo.getDato();
             if (inicio == ultimo) {
                 inicio = ultimo = null;
-                size--;
             } else {
                 ultimo = ultimo.getAnterior();
                 ultimo.setSiguiente(null);
-                size--;
             }
         }
+        size--;
         return  eliminado;
     }
 

@@ -6,7 +6,6 @@ public class Controlador {
     private Patio patio;
     private ListaRutas rutas;
     private Contenedor contenedorSeleccionado;
-    private Ruta rutaSeleccionada;
 
     // Inicialización de los atributos
     public Controlador(){
@@ -15,7 +14,6 @@ public class Controlador {
         rutas = new ListaRutas();
         pilaSeleccionada = null;
         contenedorSeleccionado = null;
-        rutaSeleccionada = null;
     }
 
     // Bloque de clase Camión
@@ -97,7 +95,6 @@ public class Controlador {
         return pilaSeleccionada;
     }
 
-    public Ruta getRutaSeleccionada() { return rutaSeleccionada; }
 
     // Setters
     public void setContenedorSeleccionado(Contenedor contenedorSeleccionado) {
@@ -108,5 +105,4 @@ public class Controlador {
         this.pilaSeleccionada = pilaSeleccionada;
     }
 
-    public void setRutaSeleccionada(Ruta rutaSeleccionada) { this.rutaSeleccionada = rutaSeleccionada; }
 }
