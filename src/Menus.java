@@ -75,8 +75,12 @@ public class Menus {
                 case "1" -> {
                     controlador.seleccionarPila();
                     if (controlador.getPilaSeleccionada() != null) {
-                        controlador.agregarContenedor();
-                        System.out.println("Contenedor agregado correctamente!");
+                        if(controlador.getContenedorSeleccionado() != null){
+                            controlador.agregarContenedor();
+                            System.out.println("Contenedor agregado correctamente!");
+                        }else{
+                            System.out.println("No hay un contenedor disponible...");
+                        }
                     }
                 }
                 case "2" -> {

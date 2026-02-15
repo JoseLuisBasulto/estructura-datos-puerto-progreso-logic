@@ -12,10 +12,10 @@ public class Controlador {
     public Controlador(){
         colaRecepcion = new ColaCamiones();
         patio = new Patio();
-        pilaSeleccionada = new PilaContenedores();
         rutas = new ListaRutas();
-        contenedorSeleccionado = new Contenedor();
-        rutaSeleccionada = new Ruta();
+        pilaSeleccionada = null;
+        contenedorSeleccionado = null;
+        rutaSeleccionada = null;
     }
 
     // Bloque de clase Camión
@@ -53,13 +53,9 @@ public class Controlador {
         }
     }
 
-    public void agregarContenedor(){
-        patio.agregarContenedor(pilaSeleccionada, contenedorSeleccionado);
-    }
+    public void agregarContenedor(){patio.agregarContenedor(pilaSeleccionada, contenedorSeleccionado);}
 
-    public void topePilas() {
-        patio.mostrarPilas();
-    }
+    public void topePilas() {patio.mostrarPilas();}
 
     public void asignarRuta(Contenedor contenedor, Ruta ruta) {
         ruta.getContenedoresAsignados().insertaFinal(contenedor);
@@ -70,25 +66,15 @@ public class Controlador {
     }
 
     // Bloque de clase Contenedor
-    public void agregarProducto(){
-        contenedorSeleccionado.agregarProducto();
-    }
+    public void agregarProducto(){contenedorSeleccionado.agregarProducto();}
 
-    public Producto eliminarProducto(){
-        return contenedorSeleccionado.eliminarProducto();
-    }
+    public Producto eliminarProducto(){return contenedorSeleccionado.eliminarProducto();}
 
-    public void buscarProducto(){
-        contenedorSeleccionado.buscarProducto();
-    }
+    public void buscarProducto(){contenedorSeleccionado.buscarProducto();}
 
-    public double calcularPesoTotal(){
-        return contenedorSeleccionado.calcularPeso();
-    }
+    public double calcularPesoTotal(){return contenedorSeleccionado.calcularPeso();}
 
-    public void mostrarProductos(){
-        contenedorSeleccionado.mostrarProductos();
-    }
+    public void mostrarProductos(){contenedorSeleccionado.mostrarProductos();}
 
     // Getters
     public ColaCamiones getColaRecepcion() {

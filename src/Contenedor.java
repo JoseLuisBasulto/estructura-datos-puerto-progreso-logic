@@ -30,7 +30,12 @@ public class Contenedor {
         System.out.println("Ingrese peso en kg: ");
         double peso = sc.nextDouble();
 
-        productos.insertaFinal(new Producto(id,nombre,peso));
+        // Se verifica que no haya un contenedor con el id ingresado, para evitar duplicados
+        if(productos.buscarElemento(id) == null){
+            productos.insertaFinal(new Producto(id,nombre,peso));
+        }else{
+            System.out.println("\nIdentificador ocupado, volver a intentar...");
+        }
     }
 
     // Método que no recibe parámetros, devuelve un valor double que es el peso del contenedor
