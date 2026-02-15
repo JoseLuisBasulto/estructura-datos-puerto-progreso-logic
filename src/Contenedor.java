@@ -121,7 +121,7 @@ public class Contenedor {
     //Método que no recibe parámetros, simplemente recorre toda la lista de productos e imprime el producto
     public void mostrarProductos(){
         if(productos.vacio()){ //Si la lista de  productos está vacía
-            System.out.println("\nNo hay productos en el contendor...");
+            System.out.println("\nNo hay productos en el contenedor...");
             return;
         }
 

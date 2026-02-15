@@ -110,11 +110,13 @@ public class Patio {
             String cadenaUsuario = sc.nextLine();
 
             while (!pilaActual.isEmpty() && !pilaActual.top().toString().equals(cadenaUsuario)) {
-                pilaAuxiliar.push(pilaActual.pop());
+                Nodo nodo = (Nodo) pilaActual.pop(); // pop devuelve nodo así que se guarda
+                Contenedor contenedor = (Contenedor) nodo.getDato(); // Se castea el dato del nodo a tipo Contenedor
+                pilaAuxiliar.push(contenedor);
             }
 
             if (!pilaActual.isEmpty() && pilaActual.top().toString().equals(cadenaUsuario)) {
-                Nodo nodo = (Nodo) pilaActual.pop(); // EL pop devuelve un nodo
+                Nodo nodo = (Nodo) pilaActual.pop(); // EL pop devuelve un nodo así que se guarda
                 contenedorDeseado = (Contenedor) nodo.getDato(); // Ahora podemos castear el dato de tipo Object del Nodo a Contenedor
                 System.out.println("\nEl contenedor " + contenedorDeseado + " fue extraído exitosamente!");
             } else {
@@ -122,7 +124,9 @@ public class Patio {
             }
 
             while (!pilaAuxiliar.isEmpty()) {
-                pilaActual.push(pilaAuxiliar.pop());
+                Nodo nodo = (Nodo) pilaAuxiliar.pop();
+                Contenedor contenedor = (Contenedor) nodo.getDato();
+                pilaActual.push(contenedor);
             }
         }
         return contenedorDeseado;
