@@ -68,7 +68,7 @@ public class Menus {
             System.out.println("[6] ELIMINAR PILA DE CONTENEDORES");
             System.out.println("[7] VOLVER AL MENÚ PRINCIPAL");
 
-            System.out.println("\nSeleccione una opción");
+            System.out.println("\nSeleccione una opción:");
             opcion = sc.nextLine();
 
             switch (opcion) {
@@ -80,7 +80,7 @@ public class Menus {
                             System.out.println("Contenedor agregado correctamente!");
                             controlador.setContenedorSeleccionado(null);
                         }else{
-                            System.out.println("No hay un contenedor disponible...");
+                            System.out.println("No hay un contenedor disponible.");
                         }
                     }
                 }
@@ -93,7 +93,7 @@ public class Menus {
                             controlador.asignarRuta(controlador.getContenedorSeleccionado(), controlador.getRutas().elegirRutas());
                         }
                     } else {
-                        System.out.println("No hay rutas trazadas");
+                        System.out.println("No hay rutas trazadas.");
                     }
                 }
                 case "3" -> controlador.topePilas();
@@ -197,10 +197,10 @@ public class Menus {
             System.out.println("Ruta encontrada!");
             System.out.println("[ESTADO DE LOGÍSTICA]:");
             System.out.println(">> RUTAS ACTIVAS: " + controlador.getRutas().getRutasActivas());
-            System.out.println(">> PRÓXIMO DESTINO: " + ((!ruta.getParadas().vacio()) ? ruta.getParadas().getInicio().getDato() : "No hay destino registrado"));
+            System.out.println(">> PRÓXIMO DESTINO: " + ((!ruta.getParadas().vacio()) ? ruta.getParadas().getInicio().getDato() : "No hay destino registrado."));
             System.out.println(">> TOTAL DE PARADAS PROGRAMADAS: " + ruta.getParadas().size());
 
-            System.out.println("Presione Enter para volver al menú principal...");
+            System.out.println("Presione Enter para volver al menú principal.");
             sc.nextLine();
         }
     }
@@ -223,7 +223,7 @@ public class Menus {
                 System.out.println("[5] MOSTRAR PRODUCTOS");
                 System.out.println("[6] REGRESAR");
 
-                System.out.println("\nSeleccione una opción");
+                System.out.println("\nSeleccione una opción:");
                 opcion = sc.nextLine();
 
                 switch (opcion) {
@@ -231,9 +231,9 @@ public class Menus {
                     case "2" -> {
                         Producto prod = controlador.eliminarProducto();
                         if (prod == null) {
-                            System.out.println("\nNo existe este producto...");
+                            System.out.println("\nNo existe este producto.");
                         } else {
-                            System.out.println("\nProducto con ID: (" + prod.getId() + ") eliminado");
+                            System.out.println("\nProducto con ID: (" + prod.getId() + ") eliminado.");
                         }
                     }
                     case "3" -> controlador.buscarProducto();
@@ -243,7 +243,7 @@ public class Menus {
                         controlador.agregarContenedor();
                         return;
                     }
-                    default -> System.out.println("Opción inválida");
+                    default -> System.out.println("Opción inválida.");
                 }
             } while (true);
         }

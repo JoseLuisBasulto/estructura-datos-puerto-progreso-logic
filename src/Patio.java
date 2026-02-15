@@ -91,6 +91,9 @@ public class Patio {
             return null;
         }
 
+        System.out.println("Pilas de contenedores registradas:");
+        pilaSeleccionada.imprimirElementos();
+
         Scanner sc = new Scanner(System.in);
         System.out.println("Ingrese el nombre del contenedor a retirar:");
         String cadenaUsuario = sc.nextLine();

@@ -11,13 +11,6 @@ public class Ruta {
     private boolean activa = false;
     private ListaSimple contenedoresAsignados;
 
-    // Crear una ruta por default sin un identificador
-    public Ruta(){
-        this.paradas = new ListaDoble();
-        this.contenedoresAsignados = new ListaSimple();
-        this.idRuta = null;
-    }
-
     public Ruta(String idRuta){ //Crear ruta
         this.paradas = new ListaDoble();
         this.contenedoresAsignados = new ListaSimple();
@@ -146,10 +139,6 @@ public class Ruta {
 
     public ListaDoble getParadas() {
         return paradas;
-    }
-
-    public String getIdRuta() {
-        return idRuta;
     }
 
     public ListaSimple getContenedoresAsignados() {
